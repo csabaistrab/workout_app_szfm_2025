@@ -46,3 +46,50 @@ Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhe
 
 7. Fogalomtár
 BMI index: a magasság és súly alapján kiszámolt érték mely elhizási kategoriákba sorol
+
+Funkcionális Specifikéció
+
+1.Áttekintés
+Az applikáció egy androidra készülő telefonos applikáció lesz.
+Célja hogy a felhasználó BMI index alapján kapjon egy edzéstervet
+és ezt a tervet az applikáció segitségével tudja nyomon követni.
+
+
+2. Jelenlegi helyzet
+Megnyitásánál kezdőképernyő fogadjon minket,
+melyről vendég felhasználóként tudunk tovább lépni a következő felületre ,
+ahol megadhatjuk nevünket súlyunkat és magasságunk ami alapján a rendszer kiszámolja a BMI indexet
+és ezek alapján kapunk egy előre elkészitett edzéstervet
+8 hétre, heti 5 napra bontva 2 pihenővel, minden nap 5 gyakorlattal.
+Ezeket a gyakorlatokat szeretnénk látni heti és napi felosztásban,
+ezeken a felületeken pipával jelezve az elvégzett gyakolatokat.
+
+3.Követelménylista
+Kezdő felületen belépés gomb, regisztráció gomb, vendég gomb
+Vendég felületen "Név" textbox, "Magasság" textbox, "Súly" textbox, "Megadom" gomb
+Heti lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
+Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
+
+
+4. Üzleti folyamatok modellje
+Szeretnénk egyszerűsiteni az emberek számára hogy könnyebben beléphessenek akár otthonukból is
+egy egészségesebb életmódba kezdve egyszerűbb testmozgással, könnyen elvégezhető gyakorlatokkal.
+
+
+5. Igényelt üzleti folyamatok
+A felhasználó a kezdőoldalon akar belépni (kezdetben csak vendégként lehetséges),
+az ezután következő felületen lehetősége lesz megadni az adatait ami alapján kiszámoljuk a BMI indexet.
+A következő felület már az előre elkészitett edzésterv heti beosztásban,
+, hetek neve előtt egy kipipálható checkbox, melyből az első hét kék a többi szürke.
+Az elérhető hetet kiválasztva megjelenik előttünk annak a hétnek az 5 napja.
+
+
+6. Használati esetek
+Esetünkben egy vendégfelhasználó tudja kezelni a felületet, aki felhasználónév megadást követően megadja a nevét, a súlyát, és a magasságát, majd egy BMI index számítást követően kap egy edzéstervet.
+Az edzéstervet egy felületen tudja nyomon követni, 8 hét lebontásában, ahol minden héthez tartozik 5 nap és minden nap 5 gyakorlatot kell végrehajtani.
+
+
+
+
+
+
