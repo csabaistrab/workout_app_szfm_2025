@@ -33,6 +33,7 @@ az ezután következő felületen lehetősége lesz megadni az adatait ami alapj
 A következő felület már az előre elkészitett edzésterv heti beosztásban,
 , hetek neve előtt egy kipipálható checkbox, melyből az első hét kék a többi szürke.
 Az elérhető hetet kiválasztva megjelenik előttünk annak a hétnek az 5 napja.
+A napok neve előtt egy kipipálható checkbox. Ugyanilyen módon a napot kiválasztva megjelennek az aznapi feladatok.
 
 
 6. Követelménylista
@@ -74,6 +75,7 @@ Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhe
 4. Üzleti folyamatok modellje
 Szeretnénk egyszerűsiteni az emberek számára hogy könnyebben beléphessenek akár otthonukból is
 egy egészségesebb életmódba kezdve egyszerűbb testmozgással, könnyen elvégezhető gyakorlatokkal.
+A játékos és könnyen kezelhető rendszer nagyon alacsony belépési szintet biztosit.
 
 
 5. Igényelt üzleti folyamatok
@@ -87,6 +89,7 @@ Az elérhető hetet kiválasztva megjelenik előttünk annak a hétnek az 5 napj
 6. Használati esetek
 Esetünkben egy vendégfelhasználó tudja kezelni a felületet, aki felhasználónév megadást követően megadja a nevét, a súlyát, és a magasságát, majd egy BMI index számítást követően kap egy edzéstervet.
 Az edzéstervet egy felületen tudja nyomon követni, 8 hét lebontásában, ahol minden héthez tartozik 5 nap és minden nap 5 gyakorlatot kell végrehajtani.
+A gyakorlatok végrehajtását követően pipával jelzi a rendszernek, hogy végre van hajtva, majd minden gyakorlat elvégzése után a nap is ki van pipálva, a napok után az adott hét is.
 
 
 Rendszerterv
@@ -116,6 +119,7 @@ Vendég felhasználó számára elérhető funkciók:
 	- Saját feladatainak kipipálása
 Felhasználói adatok tárolása, android környezetbe való működés.
 Más felhasználó adataihoz nem lehet hossza férni.
+GDPR-nak való megfelelés.
 
 
 4. Funkcionális terv
@@ -148,7 +152,7 @@ A fejlesztői eszközök
 	- Google Cloud
 
 7. Architekturális terv:
-A rendszerhez szükség van egy adatbázis szerverre, ebben az esetben MongoDB-t használunk. 
+A rendszerhez szükség van egy adatbázis szerverre, ebben az esetben MongoDB-t használunk. A kliens oldali programokat egy REST api szolgálja ki, ez csatlakozik az adatbázis szerverhez. A kliensekkel JSON objektumokkal kommunikál.
 
 8. Adatbázis terv
 todo(Dani)
