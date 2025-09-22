@@ -89,6 +89,83 @@ Esetünkben egy vendégfelhasználó tudja kezelni a felületet, aki felhasznál
 Az edzéstervet egy felületen tudja nyomon követni, 8 hét lebontásában, ahol minden héthez tartozik 5 nap és minden nap 5 gyakorlatot kell végrehajtani.
 
 
+Rendszerterv
+
+1. Célja
+Az applikáció egy androidra készülő telefonos applikáció lesz.
+Célja hogy a felhasználó BMI index alapján kapjon egy edzéstervet
+és ezt a tervet az applikáció segitségével tudja nyomon követni.
+Számontartja az előrehaladást, kezdetben statikus edzéstervekkel.
+Eligazodás érdekében minimalista felhasználói felület
+A rendszer androidos eszközön használható.
+
+
+2. Projektterv
+Szerepkörök és felelősségek
+Frontend logika: Istráb Csaba
+Frontend UI: Müller Róbert
+Backend API: Bihari Levente
+Adatbázis: Lendvai-Benyó Dániel
+
+3. Követelmények
+Vendég felhasználó számára elérhető funkciók:
+	- Név és adatok megadása
+	- Irreális adatok esetén hibát dob vissza program
+	- A heti, valamint a napi lebontás felületének megtekintése
+	- Gyakorlatok nyomon követése heti és napiszinten pipákkal
+	- Saját feladatainak kipipálása
+Felhasználói adatok tárolása, android környezetbe való működés.
+Más felhasználó adataihoz nem lehet hossza férni.
+
+
+4. Funkcionális terv
+Rendszerszereplők: 
+	-Vendég
+Rendszerhasználati eset:
+Vendég:
+	- Megadhatja a nevét és az adatait
+	- Megtekintheti, heti és napi leosztásban a feladatokat
+	- Kipipálhatja az elvégzet heteket napokat és feladatokat
+Menü-hierarchia:
+Kezdőképernyő:
+	- Vendég gomb 
+		- Név textbox
+		- Magasság textbox
+		- Súly textbox
+		- Mentés gomb
+	-Heti lebontás
+		-Téglalapos tekerhető felsorolás
+		-Tartalmazza a hét 5 napját
+	-Nap lebontás
+		-Téglalapos tekerhető felsorolás
+		-Tartalmazza a napi 5 gyakorlatot
+
+6.Fizikai környezet
+
+Nincsenek megvásárolható komponensei.
+A fejlesztői eszközök
+	- VS Code
+	- Google Cloud
+
+7. Architekturális terv:
+A rendszerhez szükség van egy adatbázis szerverre, ebben az esetben MongoDB-t használunk. 
+
+8. Adatbázis terv
+todo(Dani)
+
+9.Implementációs terv
+A Mobil felület főként ReactNative, CSS, és Javascript nyelven fog készülni. Ezeket a technológiákat amennyire csak lehet külön fájlokba írva készítjük, és úgy fogjuk egymáshoz csatolni a jobb átláthatóság, könnyebb változtathatóság, és könnyebb bővítés érdekében. Képes lesz felhasználni a Backend részen futó REST szolgáltatás metódusait, ezáltal tud felvinni és lekérdezni adatokat a MongoDB adatbázisból.
+
+9.Tesztterv
+Unit teszt: 
+	- Metódusok megfelelő működésének tesztelése
+Alfa teszt:
+	- Android kompatibilitás tesztelése
+Tesztelendő funkciók:
+	- Képesnek kell lennie csatlakozni androidos klienshez. 
+	- Képesnek kell lennie egy időben kiszolgálni több klienst is.
+	
+
 
 
 
