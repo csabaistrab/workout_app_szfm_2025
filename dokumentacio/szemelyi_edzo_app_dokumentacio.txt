@@ -4,6 +4,7 @@ Edzőterv applikáció követelményspecifikáció
 Az applikáció egy androidra készülő telefonos applikáció lesz.
 Célja hogy a felhasználó BMI index alapján kapjon egy edzéstervet
 és ezt a tervet az applikáció segitségével tudja nyomon követni.
+Számontartja az előrehaladást, kezdetben statikus edzéstervekkel.
 
 
 2. Jelenlegi helyzet
@@ -20,6 +21,8 @@ Az applikáció IOS kompatabilitása.
 Játékos jutalomrendszer, az előrehaladás és a streak jutalmazása. Streak toplista.
 Biztonságos login rendszer a kezdőképernyőn, regisztráció és belépés. Vendég funkció megtartása.
 Személyre szabott edzéstervek, magadnak válogatható edzéstervek pontok alapján.
+Nehezebb feladat több pont. Nagyobb mennyiség több pont.
+Időzités beépitve a feladatoktól függően.
 
 
 4. Üzleti folyamat modellje
@@ -43,17 +46,19 @@ Kezdő felületen belépés gomb, regisztráció gomb, vendég gomb
 Vendég felületen "Név" textbox, "Magasság" textbox, "Súly" textbox, "Megadom" gomb
 Heti lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
 Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
+Ezekben a lebontásokban kiválasztás érintéssel igy elvérve az almenüt
 
 
 7. Fogalomtár
 BMI index: a magasság és súly alapján kiszámolt érték mely elhizási kategoriákba sorol
 
-Funkcionális Specifikéció
+Funkcionális Specifikáció
 
 1.Áttekintés
 Az applikáció egy androidra készülő telefonos applikáció lesz.
 Célja hogy a felhasználó BMI index alapján kapjon egy edzéstervet
 és ezt a tervet az applikáció segitségével tudja nyomon követni.
+Számontartja az előrehaladást, kezdetben statikus edzéstervekkel.
 
 
 2. Jelenlegi helyzet
@@ -64,6 +69,8 @@ ahol megadhatjuk nevünket súlyunkat és magasságunk ami alapján a rendszer k
 8 hétre, heti 5 napra bontva 2 pihenővel, minden nap 5 gyakorlattal.
 Ezeket a gyakorlatokat szeretnénk látni heti és napi felosztásban,
 ezeken a felületeken pipával jelezve az elvégzett gyakolatokat.
+A pipálással követjük a teljes tervben előrehaladást. A következő nap és hét mindig akkor lesz elérhető,
+ha befejeztük az előző napi gyakorlatokat (minden kipipálva).
 
 3.Követelménylista
 Kezdő felületen belépés gomb, regisztráció gomb, vendég gomb
@@ -101,7 +108,7 @@ Célja hogy a felhasználó BMI index alapján kapjon egy edzéstervet
 Számontartja az előrehaladást, kezdetben statikus edzéstervekkel.
 Eligazodás érdekében minimalista felhasználói felület
 A rendszer androidos eszközön használható.
-
+Az edzéstervek előre megirt adatbázisból lesznek megjelenitve.
 
 2. Projektterv
 Szerepkörök és felelősségek
@@ -152,13 +159,36 @@ A fejlesztői eszközök
 	- Google Cloud
 
 7. Architekturális terv:
-A rendszerhez szükség van egy adatbázis szerverre, ebben az esetben MongoDB-t használunk. A kliens oldali programokat egy REST api szolgálja ki, ez csatlakozik az adatbázis szerverhez. A kliensekkel JSON objektumokkal kommunikál.
+A rendszerhez szükség van egy adatbázis szerverre, ebben az esetben MongoDB-t használunk.
+A kliens oldali programokat egy REST api szolgálja ki, ez csatlakozik az adatbázis szerverhez.
+A kliensekkel JSON objektumokkal kommunikál.
 
-8. Adatbázis terv
-todo(Dani)
+8. Adatbázis terv (JSON)
+{
+	"weekId": 1,
+	"unlocked": true,
+	"done": false,
+	"days": [
+		{
+			"dayId": 1,
+			"done": false,
+			"tasks": [
+				{"taskId":1, "name":"10 fekvőtámasz", "done": true},
+				...
+			]
+		}, ...
+	]
+	Nap y:
+		Feladat 1
+		Feladat 2
+		Feladat 3
+		Feladat 4
+		Feladat 5
 
 9.Implementációs terv
-A Mobil felület főként ReactNative, CSS, és Javascript nyelven fog készülni. Ezeket a technológiákat amennyire csak lehet külön fájlokba írva készítjük, és úgy fogjuk egymáshoz csatolni a jobb átláthatóság, könnyebb változtathatóság, és könnyebb bővítés érdekében. Képes lesz felhasználni a Backend részen futó REST szolgáltatás metódusait, ezáltal tud felvinni és lekérdezni adatokat a MongoDB adatbázisból.
+A Mobil felület főként ReactNative, CSS, és Javascript nyelven fog készülni. Ezeket a technológiákat amennyire csak lehet külön fájlokba írva készítjük,
+és úgy fogjuk egymáshoz csatolni a jobb átláthatóság, könnyebb változtathatóság, és könnyebb bővítés érdekében.
+Képes lesz felhasználni a Backend részen futó REST szolgáltatás metódusait, ezáltal tud felvinni és lekérdezni adatokat az adatbázisból.
 
 9.Tesztterv
 Unit teszt: 
