@@ -178,12 +178,7 @@ A kliensekkel JSON objektumokkal kommunikál.
 			]
 		}, ...
 	]
-	Nap y:
-		Feladat 1
-		Feladat 2
-		Feladat 3
-		Feladat 4
-		Feladat 5
+}
 
 9.Implementációs terv
 A Mobil felület főként ReactNative, CSS, és Javascript nyelven fog készülni. Ezeket a technológiákat amennyire csak lehet külön fájlokba írva készítjük,
