@@ -15,6 +15,8 @@ ahol megadhatjuk nevünket súlyunkat és magasságunk ami alapján a rendszer k
 8 hétre, heti 5 napra bontva 2 pihenővel, minden nap 5 gyakorlattal.
 Ezeket a gyakorlatokat szeretnénk látni heti és napi felosztásban,
 ezeken a felületeken pipával jelezve az elvégzett gyakolatokat.
+A pipálással követjük a teljes tervben előrehaladást. A következő nap és hét mindig akkor lesz elérhető,
+ha befejeztük az előző napi gyakorlatokat (minden kipipálva).
 
 3. Vágyálom rendszer
 Az applikáció IOS kompatabilitása.
@@ -47,6 +49,7 @@ Vendég felületen "Név" textbox, "Magasság" textbox, "Súly" textbox, "Megado
 Heti lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
 Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
 Ezekben a lebontásokban kiválasztás érintéssel igy elvérve az almenüt
+Minden listán a gombok előtti checkbox melyet kipipálva elvégezzük az adott feladatot
 
 
 7. Fogalomtár
