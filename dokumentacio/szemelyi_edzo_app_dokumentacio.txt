@@ -80,6 +80,8 @@ Kezdő felületen belépés gomb, regisztráció gomb, vendég gomb
 Vendég felületen "Név" textbox, "Magasság" textbox, "Súly" textbox, "Megadom" gomb
 Heti lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
 Napi lebontás felületen tekerhető lista szürke (nem elréhető), kék (elrhető), zöld (teljesitett)
+Minden listán a gombok előtti checkbox melyet kipipálva elvégezzük az adott feladatot.
+
 
 
 4. Üzleti folyamatok modellje
@@ -101,6 +103,7 @@ Esetünkben egy vendégfelhasználó tudja kezelni a felületet, aki felhasznál
 Az edzéstervet egy felületen tudja nyomon követni, 8 hét lebontásában, ahol minden héthez tartozik 5 nap és minden nap 5 gyakorlatot kell végrehajtani.
 A gyakorlatok végrehajtását követően pipával jelzi a rendszernek, hogy végre van hajtva, majd minden gyakorlat elvégzése után a nap is ki van pipálva, a napok után az adott hét is.
 
+7. Képernyő tervek (lásd a dokumentáció mappájában)
 
 Rendszerterv
 
