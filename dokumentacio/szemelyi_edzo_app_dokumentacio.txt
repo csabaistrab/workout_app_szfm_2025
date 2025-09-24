@@ -158,7 +158,7 @@ Kezdőképernyő:
 		-Tartalmazza a napi 5 gyakorlatot
 
 6.Fizikai környezet
-
+Az alkalmazás android operációs rendszerű telefonra készül.
 Nincsenek megvásárolható komponensei.
 A fejlesztői eszközök
 	- VS Code
