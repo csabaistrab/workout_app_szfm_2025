@@ -1,9 +1,9 @@
-const express = require('express');
+import express from "express";
+import { getWorkouts, completeWorkout } from "../controllers/workoutController.js";
+
 const router = express.Router();
-const ctrl = require('../controllers/progress.controller');
 
-router.get('/users/:userId/weeks', ctrl.getWeeks);
-router.get('/users/:userId/weeks/:weekId', ctrl.getWeek);
-router.post('/users/:userId/weeks/:weekId/days/:dayId/tasks/:taskId/complete', ctrl.completeTask);
+router.get("/", getWorkouts);
+router.post("/complete", completeWorkout);
 
-module.exports = router;
+export default router;

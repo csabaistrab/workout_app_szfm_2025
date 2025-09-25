@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import workoutRoutes from "./routes/progress.routes.js";
+import workoutRoutes from "./routes/workouts.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
