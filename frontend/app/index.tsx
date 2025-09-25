@@ -2,8 +2,8 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 
 const weeks = [
-  { id: 1, title: "1. hét", unlocked: true },
-  { id: 2, title: "2. hét", unlocked: false },
+  { id: 1, title: "1. hét", unlocked: true, done: false },
+  { id: 2, title: "2. hét", unlocked: false, done: false },
 ];
 
 export default function Home() {
@@ -28,9 +28,15 @@ export default function Home() {
               marginBottom: 10,
               backgroundColor: item.unlocked ? "#4caf50" : "#ccc",
               borderRadius: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Text style={{ fontSize: 18, color: "#fff" }}>{item.title}</Text>
+            <Text style={{ fontSize: 20 }}>
+              {item.done ? "✅" : "⬜"}
+            </Text>
           </TouchableOpacity>
         )}
       />
