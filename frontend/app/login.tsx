@@ -14,35 +14,44 @@ export default function LoginScreen() {
       alert("Kérlek add meg a neved, magasságot és testsúlyt!");
       return;
     }
-    router.replace("/home");
+    router.replace(`/home?name=${encodeURIComponent(name)}`);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bejelentkezés vendégként</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Neved"
-        value={name}
-        onChangeText={setName}
-      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Neved</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Add meg a neved"
+          value={name}
+          onChangeText={setName}
+        />
+      </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Magasság (cm)"
-        keyboardType="numeric"
-        value={height}
-        onChangeText={setHeight}
-      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Magasság</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Magasság cm-ben"
+          keyboardType="numeric"
+          value={height}
+          onChangeText={setHeight}
+        />
+      </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Testsúly (kg)"
-        keyboardType="numeric"
-        value={weight}
-        onChangeText={setWeight}
-      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Testsúly</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Testsúly kg-ban"
+          keyboardType="numeric"
+          value={weight}
+          onChangeText={setWeight}
+        />
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Belépés</Text>
@@ -62,25 +71,39 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: "bold",
+    marginBottom: 30,
+    textAlign: "center",
+  },
+  inputContainer: {
+    width: "100%",
     marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 8,
+    color: "#333",
   },
   input: {
     width: "100%",
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 10,
-    padding: 10,
-    marginBottom: 15,
+    padding: 15,
+    fontSize: 16,
   },
   button: {
     backgroundColor: "#007bff",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
+    paddingVertical: 15,
+    paddingHorizontal: 40,
     borderRadius: 10,
+    marginTop: 10,
+    width: "100%",
+    alignItems: "center",
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
   },
 });
