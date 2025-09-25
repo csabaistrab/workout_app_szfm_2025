@@ -1,24 +1,32 @@
+// app/login.tsx
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function LoginScreen() {
+  const [name, setName] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const router = useRouter();
 
   const handleLogin = () => {
-    if (!height || !weight) {
-      alert("Kérlek add meg a magasságot és a testsúlyt!");
+    if (!name || !height || !weight) {
+      alert("Kérlek add meg a neved, magasságot és testsúlyt!");
       return;
     }
-    // Itt lehetne menteni backendbe vagy context-be az adatokat
-    router.replace("/home"); // átirányítás a home.tsx képernyőre
+    router.replace("/home");
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bejelentkezés vendégként</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Neved"
+        value={name}
+        onChangeText={setName}
+      />
 
       <TextInput
         style={styles.input}

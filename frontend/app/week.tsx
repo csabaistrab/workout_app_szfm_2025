@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { useState, useEffect } from "react";
 
-const days = [
-  { id: 1, title: "1. nap", done: true },
+// Kezdeti adatok
+const initialDays = [
+  { id: 1, title: "1. nap", done: false },
   { id: 2, title: "2. nap", done: false },
   { id: 3, title: "3. nap", done: false },
   { id: 4, title: "4. nap", done: false },
@@ -12,6 +14,12 @@ const days = [
 export default function Week() {
   const router = useRouter();
   const { weekId } = useLocalSearchParams();
+  const [days, setDays] = useState(initialDays);
+
+  // Itt lehetne AsyncStorage-ből betölteni a mentett állapotot
+  useEffect(() => {
+    // Betöltés logika...
+  }, [weekId]);
 
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
@@ -24,11 +32,11 @@ export default function Week() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => router.push(`/day?dayId=${item.id}`)}
+            onPress={() => router.push(`/day?dayId=${item.id}&weekId=${weekId}`)}
             style={{
               padding: 20,
               marginBottom: 10,
-              backgroundColor: "#2196f3",
+              backgroundColor: item.done ? "#4caf50" : "#2196f3",
               borderRadius: 10,
               flexDirection: "row",
               justifyContent: "space-between",
