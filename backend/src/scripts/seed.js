@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const UserProgress = require('../models/userProgress.model');
 const { connect } = require('../config/db');
 
-const WORKOUT_WEEKS = 4; // for example
+const WORKOUT_WEEKS = 8;
 
 function makeTask(id, name) {
   return { taskId: id, name, done: false };
