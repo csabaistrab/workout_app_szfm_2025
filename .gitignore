@@ -41,3 +41,7 @@ app-example
 # generated native folders
 /ios
 /android
+
+/frontend/node_modules
+/backend/node_modules
+/backend/mongo-data
