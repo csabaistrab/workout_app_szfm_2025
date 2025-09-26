@@ -1,32 +1,47 @@
+import mongoose from "mongoose";
 import dotenv from "dotenv";
-import connectDB from "../config/db.js";
 import Workout from "../models/Workout.js";
 
 dotenv.config();
 
-const seed = async () => {
+const seedWorkouts = async () => {
   try {
-    await connectDB();
-    await Workout.deleteMany();
+    await mongoose.connect(process.env.MONGO_URI);
+
+    await Workout.deleteMany(); // clear old data
 
     const workouts = [];
-    for (let day = 1; day <= 5; day++) {
-      for (let task = 1; task <= 5; task++) {
-        workouts.push({
-          day,
-          taskNumber: task,
-          description: `Workout ${task} for day ${day}`,
-        });
+
+    const descriptions = [
+      "Push-ups",
+      "Squats",
+      "Plank",
+      "Jumping Jacks",
+      "Lunges"
+    ];
+
+    // Create 8 weeks * 5 days * 5 tasks
+    for (let week = 1; week <= 8; week++) {
+      for (let day = 1; day <= 5; day++) {
+        for (let task = 1; task <= 5; task++) {
+          workouts.push({
+            week,
+            day,
+            taskNumber: task,
+            description: descriptions[task - 1], // map from array
+            completed: false
+          });
+        }
       }
     }
 
     await Workout.insertMany(workouts);
-    console.log("✅ Database seeded");
-    process.exit(0);
-  } catch (err) {
-    console.error("❌ Error seeding:", err.message);
+    console.log("✅ Workouts seeded successfully!");
+    process.exit();
+  } catch (error) {
+    console.error("❌ Error seeding workouts:", error);
     process.exit(1);
   }
 };
 
-seed();
+seedWorkouts();
