@@ -24,9 +24,29 @@ export default function Day() {
       if (allDone) {
         try {
           await AsyncStorage.setItem(`week${weekId}-day${dayId}-done`, 'true');
+          
+          // Ellenőrizzük, hogy az összes nap kész van-e
+          const allDaysDone = await checkIfAllDaysDone();
+          if (allDaysDone) {
+            await AsyncStorage.setItem(`week${weekId}-done`, 'true');
+          }
         } catch (error) {
-          console.error('Error saving day completion:', error);
+          console.error('Error saving completion:', error);
         }
+      }
+    };
+
+    const checkIfAllDaysDone = async () => {
+      try {
+        const daysStatus = await Promise.all(
+          [1, 2, 3, 4, 5].map(async (dayNum) => {
+            const isDone = await AsyncStorage.getItem(`week${weekId}-day${dayNum}-done`);
+            return isDone === 'true';
+          })
+        );
+        return daysStatus.every(status => status);
+      } catch (error) {
+        return false;
       }
     };
 
@@ -45,6 +65,12 @@ export default function Day() {
   }, [allDone, router, dayId]);
 
   const toggleTask = (taskId: number) => {
+    // HA MÁR MINDEN FELADAT KÉSZ, AKKOR NE LEHESSEN VISSZAVONNI
+    if (allDone) {
+      alert("Ez a nap már teljesítve van! A feladatokat nem lehet módosítani.");
+      return;
+    }
+    
     setTasks(prev => prev.map(t => 
       t.id === taskId ? { ...t, done: !t.done } : t
     ));
@@ -54,7 +80,21 @@ export default function Day() {
     <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
       <Text style={{ fontSize: 24, marginBottom: 20, fontWeight: "bold" }}>
         {dayId}. nap feladatai
+        {allDone && " ✅"}
       </Text>
+
+      {allDone && (
+        <View style={{
+          backgroundColor: "#4caf50",
+          padding: 15,
+          borderRadius: 10,
+          marginBottom: 20,
+        }}>
+          <Text style={{ color: "#fff", fontSize: 16, textAlign: "center" }}>
+            ✅ Ez a nap teljesítve van! A feladatokat nem lehet módosítani.
+          </Text>
+        </View>
+      )}
 
       <FlatList
         data={tasks}
@@ -67,7 +107,9 @@ export default function Day() {
               marginBottom: 10,
               backgroundColor: item.done ? "#4caf50" : "#f44336",
               borderRadius: 10,
+              opacity: allDone ? 0.7 : 1, // Halványabb ha kész
             }}
+            disabled={allDone} // Letiltjuk ha kész
           >
             <Text style={{ fontSize: 18, color: "#fff" }}>
               {item.done ? "✅ " : "⬜ "} {item.title}

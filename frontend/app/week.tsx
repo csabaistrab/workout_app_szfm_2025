@@ -1,55 +1,91 @@
-// app/week.tsx - egyszerűbb
+// app/week.tsx
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { useState, useCallback } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const initialDays = [
-  { id: 1, title: "1. nap", done: false },
-  { id: 2, title: "2. nap", done: false },
-  { id: 3, title: "3. nap", done: false },
-  { id: 4, title: "4. nap", done: false },
-  { id: 5, title: "5. nap", done: false },
-];
+import { Day } from './types';
 
 export default function Week() {
   const router = useRouter();
   const { weekId } = useLocalSearchParams();
-  const [days, setDays] = useState(initialDays);
+  const [days, setDays] = useState<Day[]>([]);
+  const [weekDone, setWeekDone] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Mindig frissít amikor a képernyő aktívvá válik
   useFocusEffect(
     useCallback(() => {
-      const loadDayStatuses = async () => {
+      const loadStatuses = async () => {
         try {
+          setLoading(true);
+          
+          const dayNumbers = [1, 2, 3, 4, 5];
           const updatedDays = await Promise.all(
-            initialDays.map(async (day) => {
-              const isDone = await AsyncStorage.getItem(`week${weekId}-day${day.id}-done`);
-              return { ...day, done: isDone === 'true' };
+            dayNumbers.map(async (dayNum) => {
+              const isDone = await AsyncStorage.getItem(`week${weekId}-day${dayNum}-done`);
+              return { 
+                id: dayNum, 
+                title: `${dayNum}. nap`, 
+                done: isDone === 'true' 
+              };
             })
           );
           setDays(updatedDays);
+
+          const isWeekDone = await AsyncStorage.getItem(`week${weekId}-done`);
+          setWeekDone(isWeekDone === 'true');
+
+          const allDaysDone = updatedDays.every(day => day.done);
+          if (allDaysDone && isWeekDone !== 'true') {
+            await AsyncStorage.setItem(`week${weekId}-done`, 'true');
+            setWeekDone(true);
+          }
+
         } catch (error) {
-          console.error('Error loading day statuses:', error);
+          console.error('Error loading statuses:', error);
+        } finally {
+          setLoading(false);
         }
       };
 
-      loadDayStatuses();
+      loadStatuses();
     }, [weekId])
   );
 
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
+        <Text>Betöltés...</Text>
+      </View>
+    );
+  }
+
+  const allDaysDone = days.every(day => day.done);
+
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
-      <Text style={{ fontSize: 24, marginBottom: 20, fontWeight: "bold" }}>
+      <Text style={{ fontSize: 24, marginBottom: 10, fontWeight: "bold" }}>
         {weekId}. hét napjai
+        {weekDone && " ✅"}
       </Text>
+
+      {weekDone && (
+        <Text style={{ fontSize: 16, color: "#4caf50", marginBottom: 20, fontWeight: "bold" }}>
+          ✅ Ez a hét teljesítve van!
+        </Text>
+      )}
 
       <FlatList
         data={days}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => router.push(`/day?dayId=${item.id}&weekId=${weekId}`)}
+            onPress={() => {
+              if (weekDone) {
+                alert("Ez a hét már teljesítve van!");
+                return;
+              }
+              router.push(`/day?dayId=${item.id}&weekId=${weekId}`);
+            }}
             style={{
               padding: 20,
               marginBottom: 10,
@@ -58,6 +94,7 @@ export default function Week() {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
+              opacity: weekDone ? 0.7 : 1,
             }}
           >
             <Text style={{ fontSize: 18, color: "#fff" }}>{item.title}</Text>
@@ -67,7 +104,7 @@ export default function Week() {
       />
 
       <View style={{ marginTop: 20, alignItems: "center" }}>
-        <Text style={{ color: "#666" }}>
+        <Text style={{ color: "#666", marginBottom: 10 }}>
           {days.filter(d => d.done).length} / {days.length} nap teljesítve
         </Text>
       </View>
