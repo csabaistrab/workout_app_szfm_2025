@@ -1,7 +1,9 @@
 // app/login.tsx
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { generateWorkoutPlan } from "../services/workoutService";
 
 export default function LoginScreen() {
   const [name, setName] = useState("");
@@ -9,12 +11,55 @@ export default function LoginScreen() {
   const [weight, setWeight] = useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!name || !height || !weight) {
-      alert("Kérlek add meg a neved, magasságot és testsúlyt!");
+      Alert.alert("Hiba", "Kérlek add meg a neved, magasságot és testsúlyt!");
       return;
     }
-    router.replace(`/home?name=${encodeURIComponent(name)}`);
+
+    const parsedHeight = Number(height);
+    const parsedWeight = Number(weight);
+
+    if (Number.isNaN(parsedHeight) || Number.isNaN(parsedWeight)) {
+      Alert.alert("Hiba", "A magasságot és testsúlyt számként add meg (pl. 180, 75)");
+      return;
+    }
+
+    try {
+      // Clear previous plan and completion flags so login always starts fresh
+      try {
+        await AsyncStorage.removeItem('workoutPlan');
+        await AsyncStorage.removeItem('userBmi');
+        await AsyncStorage.removeItem('userCategory');
+        // remove week/day completion flags
+        for (let w = 1; w <= 8; w++) {
+          await AsyncStorage.removeItem(`week${w}-done`);
+          for (let d = 1; d <= 5; d++) {
+            await AsyncStorage.removeItem(`week${w}-day${d}-done`);
+          }
+        }
+      } catch (e) {
+        console.warn('Error clearing storage on login:', e);
+      }
+
+      console.log('Login: sending generateWorkoutPlan', { parsedWeight, parsedHeight });
+      const result = await generateWorkoutPlan(parsedWeight, parsedHeight);
+      console.log('Login: received result from backend', result);
+
+      if (result && result.plan) {
+        await AsyncStorage.setItem("workoutPlan", JSON.stringify(result.plan));
+      }
+      if (result && result.bmi) {
+        await AsyncStorage.setItem("userBmi", String(result.bmi));
+        await AsyncStorage.setItem("userCategory", String(result.category || ""));
+      }
+
+      // Navigate only after successful generation
+      router.replace(`/home?name=${encodeURIComponent(name)}`);
+    } catch (error: any) {
+      console.error("Error generating plan:", error);
+      Alert.alert("Hiba", error?.message || "Nem sikerült kapcsolódni a szerverhez");
+    }
   };
 
   return (
