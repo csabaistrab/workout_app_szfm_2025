@@ -1,7 +1,7 @@
 // app/home.tsx
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Week } from './types';
 
@@ -10,6 +10,7 @@ export default function Home() {
   const { name } = useLocalSearchParams();
   const [weeks, setWeeks] = useState<Week[]>([]);
   const [loading, setLoading] = useState(true);
+  const [bmi, setBmi] = useState<string | null>(null);
 
   useFocusEffect(
     useCallback(() => {
@@ -19,10 +20,10 @@ export default function Home() {
           const weekNumbers = [1, 2, 3, 4, 5];
           const updatedWeeks = await Promise.all(
             weekNumbers.map(async (weekNum) => {
-              const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
+                  const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
               return { 
                 id: weekNum, 
-                title: `${weekNum}. hét`, 
+                    title: `${weekNum}. hét`, 
                 done: isDone === 'true' 
               };
             })
@@ -39,7 +40,19 @@ export default function Home() {
     }, [])
   );
 
-  if (loading) {
+  useEffect(() => {
+    const loadBmi = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('userBmi');
+        if (stored) setBmi(stored);
+      } catch (err) {
+        console.error('Error loading BMI:', err);
+      }
+    };
+
+    loadBmi();
+  }, []);
+if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
         <Text>Betöltés...</Text>
@@ -52,10 +65,16 @@ export default function Home() {
       <Text style={{ fontSize: 24, marginBottom: 10, fontWeight: "bold" }}>
         Edzésprogram
       </Text>
-      
+
       {name && (
         <Text style={{ fontSize: 16, marginBottom: 20, color: "#666" }}>
           Üdvözöllek, {name}!
+        </Text>
+      )}
+
+      {bmi && (
+        <Text style={{ fontSize: 16, marginBottom: 10, color: "#333" }}>
+          Jelenlegi BMI: {bmi}
         </Text>
       )}
 
