@@ -1,4 +1,3 @@
-// app/day.tsx
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect } from "react";
