@@ -1,91 +1,40 @@
-// app/home.tsx
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
-import { useState, useCallback } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Week } from './types';
+// frontend/services/workoutService.ts
+import { Platform } from 'react-native';
 
-export default function Home() {
-  const router = useRouter();
-  const { name } = useLocalSearchParams();
-  const [weeks, setWeeks] = useState<Week[]>([]);
-  const [loading, setLoading] = useState(true);
+// Pick a sensible default depending on runtime.
+// - Android emulators need 10.0.2.2 to reach host machine's localhost
+// - iOS simulator and web can use localhost
+// - Real devices should replace with PC LAN IP (e.g. http://192.168.1.100:3000/api)
+export const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:3000/api' : 'http://localhost:3000/api';
 
-  useFocusEffect(
-    useCallback(() => {
-      const loadWeekStatuses = async () => {
-        try {
-          setLoading(true);
-          const weekNumbers = [1, 2, 3, 4, 5];
-          const updatedWeeks = await Promise.all(
-            weekNumbers.map(async (weekNum) => {
-              const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
-              return { 
-                id: weekNum, 
-                title: `${weekNum}. hét`, 
-                done: isDone === 'true' 
-              };
-            })
-          );
-          setWeeks(updatedWeeks);
-        } catch (error) {
-          console.error('Error loading week statuses:', error);
-        } finally {
-          setLoading(false);
-        }
-      };
+export async function generateWorkoutPlan(weight: number, height: number) {
+  const res = await fetch(`${API_URL}/workouts/generate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ weight, height }),
+  });
 
-      loadWeekStatuses();
-    }, [])
-  );
+  if (!res.ok) throw new Error("Failed to fetch workout plan");
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
-        <Text>Betöltés...</Text>
-      </View>
-    );
-  }
+  return res.json(); // backend returns { bmi, plan }
+}
 
-  return (
-    <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
-      <Text style={{ fontSize: 24, marginBottom: 10, fontWeight: "bold" }}>
-        Edzésprogram
-      </Text>
-      
-      {name && (
-        <Text style={{ fontSize: 16, marginBottom: 20, color: "#666" }}>
-          Üdvözöllek, {name}!
-        </Text>
-      )}
+export async function fetchWorkouts(week: number, day?: number) {
+  const url = `${API_URL}/workouts?week=${week}${day ? `&day=${day}` : ""}`;
+  const res = await fetch(url);
 
-      <FlatList
-        data={weeks}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => router.push(`/week?weekId=${item.id}`)}
-            style={{
-              padding: 20,
-              marginBottom: 10,
-              backgroundColor: item.done ? "#4caf50" : "#2196f3",
-              borderRadius: 10,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontSize: 18, color: "#fff" }}>{item.title}</Text>
-            <Text style={{ fontSize: 20 }}>{item.done ? "✅" : "⬜"}</Text>
-          </TouchableOpacity>
-        )}
-      />
+  if (!res.ok) throw new Error("Failed to fetch workouts");
 
-      <View style={{ marginTop: 20, alignItems: "center" }}>
-        <Text style={{ color: "#666" }}>
-          {weeks.filter(w => w.done).length} / {weeks.length} hét teljesítve
-        </Text>
-      </View>
-    </View>
-  );
+  return res.json(); // returns array of tasks
+}
+
+export async function updateWorkout(id: string, update: object) {
+  const res = await fetch(`${API_URL}/workouts/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(update),
+  });
+
+  if (!res.ok) throw new Error('Failed to update workout');
+  return res.json();
 }

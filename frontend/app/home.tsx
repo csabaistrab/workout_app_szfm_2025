@@ -20,10 +20,10 @@ export default function Home() {
           const weekNumbers = [1, 2, 3, 4, 5];
           const updatedWeeks = await Promise.all(
             weekNumbers.map(async (weekNum) => {
-                  const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
+              const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
               return { 
                 id: weekNum, 
-                    title: `${weekNum}. hét`, 
+                title: `${weekNum}. hét`, 
                 done: isDone === 'true' 
               };
             })
