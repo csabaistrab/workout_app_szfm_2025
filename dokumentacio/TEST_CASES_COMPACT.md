@@ -591,3 +591,4 @@ Státusz: ✅ OK (Megfelelő)
 
 Megjegyzések:
 A hét teljesítésének automatikus észlelése megbízhatóan működik.
+Az applikáció elvárásainak megfelelően működik.
