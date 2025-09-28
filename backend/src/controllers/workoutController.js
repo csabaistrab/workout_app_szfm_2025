@@ -6,13 +6,28 @@ const calculateBMI = (weight, height) => {
   return weight / (heightInMeters * heightInMeters);
 };
 
-// Base workouts
+// Base workouts (expanded)
 const baseWorkouts = [
-  { taskNumber: 1, description: "Push-ups", baseReps: 10 },
-  { taskNumber: 2, description: "Squats", baseReps: 15 },
-  { taskNumber: 3, description: "Plank (seconds)", baseReps: 30 },
-  { taskNumber: 4, description: "Jumping Jacks", baseReps: 20 },
-  { taskNumber: 5, description: "Lunges", baseReps: 12 },
+  { description: "Fekvőtámasz", baseReps: 10 },
+  { description: "Guggolás", baseReps: 15 },
+  { description: "Plank (másodperc)", baseReps: 30 },
+  { description: "Terpszbe szökkenés", baseReps: 20 },
+  { description: "Kitörés", baseReps: 12 },
+  { description: "Burpee", baseReps: 8 },
+  { description: "Hegymászás", baseReps: 20 },
+  { description: "Felülés", baseReps: 15 },
+  { description: "Térdemelés (másodperc)", baseReps: 30 },
+  { description: "Híd", baseReps: 12 },
+  { description: "Tolódzkodás székkel", baseReps: 10 },
+  { description: "Vádli emelés", baseReps: 20 },
+  { description: "Bicikliző felülés", baseReps: 20 },
+  { description: "Russian Twist", baseReps: 20 },
+  { description: "Falguggolás (másodperc)", baseReps: 45 },
+  { description: "Oldalsó Plank (másodperc)", baseReps: 25 },
+  { description: "Lábemelés", baseReps: 12 },
+  { description: "Csípőemelés", baseReps: 12 },
+  { description: "Ugrálókötelezés (másodperc)", baseReps: 60 },
+  { description: "Kúszás (méter)", baseReps: 20 },
 ];
 
 // Workout multipliers
@@ -69,13 +84,24 @@ export const generatePlan = async (req, res) => {
     const multiplier = workoutPlans[category].multiplier;
     const personalizedWorkouts = [];
 
+    // For each day pick a random subset of exercises (between 5 and 10 items)
     for (let week = 1; week <= 8; week++) {
       for (let day = 1; day <= 5; day++) {
-        baseWorkouts.forEach((task) => {
+        // shuffle a copy of baseWorkouts
+        const pool = [...baseWorkouts];
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+
+        const count = 5;//Math.min(pool.length, 5 + Math.floor(Math.random() * 6)); // 5..10
+        const selected = pool.slice(0, count);
+
+        selected.forEach((task, idx) => {
           personalizedWorkouts.push({
             week,
             day,
-            taskNumber: task.taskNumber,
+            taskNumber: idx + 1, // sequential per day
             description: `${task.description} - ${Math.round(task.baseReps * multiplier)} reps`,
             completed: false,
           });
