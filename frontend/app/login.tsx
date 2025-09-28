@@ -1,6 +1,6 @@
 // app/login.tsx
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateWorkoutPlan } from "../services/workoutService";
@@ -9,6 +9,7 @@ export default function LoginScreen() {
   const [name, setName] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -25,40 +26,87 @@ export default function LoginScreen() {
       return;
     }
 
-    try {
-      // Clear previous plan and completion flags so login always starts fresh
-      try {
-        await AsyncStorage.removeItem('workoutPlan');
-        await AsyncStorage.removeItem('userBmi');
-        await AsyncStorage.removeItem('userCategory');
-        // remove week/day completion flags
-        for (let w = 1; w <= 8; w++) {
-          await AsyncStorage.removeItem(`week${w}-done`);
-          for (let d = 1; d <= 5; d++) {
-            await AsyncStorage.removeItem(`week${w}-day${d}-done`);
-          }
-        }
-      } catch (e) {
-        console.warn('Error clearing storage on login:', e);
-      }
+    if (parsedHeight < 100 || parsedHeight > 250) {
+      Alert.alert("Hiba", "A magasságnak 100 és 250 cm között kell lennie");
+      return;
+    }
 
-      console.log('Login: sending generateWorkoutPlan', { parsedWeight, parsedHeight });
-      const result = await generateWorkoutPlan(parsedWeight, parsedHeight);
+    if (parsedWeight < 30 || parsedWeight > 200) {
+      Alert.alert("Hiba", "A testsúlynak 30 és 200 kg között kell lennie");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Clear previous data
+      await clearPreviousData();
+
+      console.log('Login: sending generateWorkoutPlan', { 
+        weight: parsedWeight, 
+        height: parsedHeight 
+      });
+
+      // Timeout hozzáadása a hálózati kéréshez
+      const result = await Promise.race([
+        generateWorkoutPlan(parsedWeight, parsedHeight),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error("Időtúllépés: a szerver nem válaszol")), 10000)
+        )
+      ]);
+
       console.log('Login: received result from backend', result);
 
       if (result && result.plan) {
         await AsyncStorage.setItem("workoutPlan", JSON.stringify(result.plan));
-      }
-      if (result && result.bmi) {
-        await AsyncStorage.setItem("userBmi", String(result.bmi));
+        await AsyncStorage.setItem("userBmi", String(result.bmi || ""));
         await AsyncStorage.setItem("userCategory", String(result.category || ""));
+        
+        // Sikeres bejelentkezés
+        router.replace(`/home?name=${encodeURIComponent(name)}`);
+      } else {
+        throw new Error("Érvénytelen válasz a szervertől");
       }
 
-      // Navigate only after successful generation
-      router.replace(`/home?name=${encodeURIComponent(name)}`);
     } catch (error: any) {
       console.error("Error generating plan:", error);
-      Alert.alert("Hiba", error?.message || "Nem sikerült kapcsolódni a szerverhez");
+      
+      let errorMessage = "Nem sikerült kapcsolódni a szerverhez";
+      
+      if (error.message.includes("Network request failed")) {
+        errorMessage = "Hálózati hiba: Ellenőrizd az internetkapcsolatot";
+      } else if (error.message.includes("Időtúllépés")) {
+        errorMessage = error.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      Alert.alert("Hiba", errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const clearPreviousData = async () => {
+    try {
+      await AsyncStorage.multiRemove([
+        'workoutPlan',
+        'userBmi', 
+        'userCategory'
+      ]);
+      
+      // Töröljük a completion flag-eket
+      const keysToRemove = [];
+      for (let w = 1; w <= 8; w++) {
+        keysToRemove.push(`week${w}-done`);
+        for (let d = 1; d <= 5; d++) {
+          keysToRemove.push(`week${w}-day${d}-done`);
+        }
+      }
+      
+      await AsyncStorage.multiRemove(keysToRemove);
+    } catch (e) {
+      console.warn('Error clearing storage:', e);
     }
   };
 
@@ -73,34 +121,51 @@ export default function LoginScreen() {
           placeholder="Add meg a neved"
           value={name}
           onChangeText={setName}
+          editable={!loading}
         />
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Magasság</Text>
+        <Text style={styles.label}>Magasság (cm)</Text>
         <TextInput
           style={styles.input}
-          placeholder="Magasság cm-ben"
+          placeholder="pl. 180"
           keyboardType="numeric"
           value={height}
           onChangeText={setHeight}
+          editable={!loading}
         />
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Testsúly</Text>
+        <Text style={styles.label}>Testsúly (kg)</Text>
         <TextInput
           style={styles.input}
-          placeholder="Testsúly kg-ban"
+          placeholder="pl. 75"
           keyboardType="numeric"
           value={weight}
           onChangeText={setWeight}
+          editable={!loading}
         />
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Belépés</Text>
+      <TouchableOpacity 
+        style={[styles.button, loading && styles.buttonDisabled]} 
+        onPress={handleLogin}
+        disabled={loading}
+      >
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Belépés</Text>
+        )}
       </TouchableOpacity>
+
+      {loading && (
+        <Text style={styles.loadingText}>
+          Edzésterv generálása...
+        </Text>
+      )}
     </View>
   );
 }
@@ -146,9 +211,17 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
+  buttonDisabled: {
+    backgroundColor: "#ccc",
+  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  loadingText: {
+    marginTop: 10,
+    color: "#666",
+    fontSize: 14,
   },
 });
