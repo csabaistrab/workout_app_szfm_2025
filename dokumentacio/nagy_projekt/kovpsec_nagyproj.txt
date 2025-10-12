@@ -1,0 +1,71 @@
+Edzőterv applikáció követelményspecifikáció
+
+1. Jelenlegi helyzet
+Az applikáció jelenleg csak vendég felhasználókat tud kezelni, tőlük bekérve nevet, súlyt és magasságot kiszámolja a BMI indexet
+és ad egy feladat listát véletlenszerűen kiválaszott feladatokból egy lokálisan hosztolt adatbázisból.
+Minden edzésterv csak egyszeri belépésig érvényes. A feladatokat ki lehet pipálni és igy lehet előre haladni a napi és heti feladatokban is.
+A felületek között szabadon lehet előre és visszalépni.
+
+2. Vágyálom rendszer
+Felhasználó regisztráció e-mail cimmel és jelszóval.
+Személyreszabott, rugalmas edzéstervet szeretnénk a felhasználó számára biztositani AI segitségével.
+Az AI a megadott adatok alapján melyek a testsúly, magasság és életkor,
+és egy rövid text alapján amelyben a felhasználó megadja milyen céllal szeretne edzeni tervezi meg az edzéstervet melyet a felhasználó aztán
+vagy elfogad vagy módositást kér. Ezt edzéstervet szeretnénk a felhasználó számára tárolni, hogy újabb belépésnél ismét elérhesse.
+A felületek legyenek könnyen kezelhetőek és animációval ellátottak.
+A felhasználó adatait módosithassa a későbbiekben ha az edzés folyamán például fogyott ezek alapján az AI korrigálhatja a tervet.
+A felhasználókat szeretnénk megjutalmazni előrehaladásuk során mérföldkő rendszerrel, matricákkal, animációkkal, hangokkal, értesitésekkel.
+A felületeket szeretnénk különböző szinösszeállitásokban látni, akár szinvak felhasználók számára is.
+
+3. Jelenlegi üzleti folyamatok
+Szeretnénk egyszerűsiteni az emberek számára hogy könnyebben beléphessenek akár otthonukból is
+egy egészségesebb életmódba kezdve egyszerűbb testmozgással, könnyen elvégezhető gyakorlatokkal.
+A játékos és könnyen kezelhető rendszer nagyon alacsony belépési szintet biztosit.
+
+4. Igényelt üzleti folyamatok
+A felhasználó a kezdőoldalon akar belépni,
+az ezután következő felületen lehetősége lesz megadni az adatait ami alapján az AI megad egy edzéstervet.
+Ugyanilyen módon a napot kiválasztva megjelennek az aznapi feladatok.
+
+A főbb felületek:
+	Bejelentkezés / Regisztráció oldal:
+		A felhasználók új fiókot hozhatnak létre vagy bejelentkezhetnek meglévő adataikkal.
+	Adatbekérő oldal:
+		Az új felhasználó itt adja meg az adatait és az AI szabadszöveges mezőjéban itt adja meg az igényeit.
+	Menü:
+		Profil
+			Felhasználó adatai és beállitási lehetőségek
+		Edzésterv
+			Az edzésterv
+		Mérföldkövek
+			Az előrehaladás mértékében jutalmak gyűjteménye
+
+Backend logika
+	Autentikáció és jogosultságkezelés
+		Regisztráció (jelszó hash-eléssel)
+		Bejelentkezés
+		Jogosultság-szintek kezelése (felhasználó / admin)
+	Adatkezelés és API réteg
+		RESTful API biztosítja a kapcsolatot a frontend és az adatbázis között
+		CRUD műveletek az entitásokon
+		Minden adat JSON formátumban kerül küldésre/visszaadásra
+	Edzésterv kezelése
+		Felhasználókhoz tartozó edzésterv mentése
+		Felhasználó beállitásainak tárolása
+	Hibakezelés és biztonság
+		Minden végpont validálja a bemenő adatokat
+		Hibák JSON formátumban kerülnek visszaadásra
+		Adatbázis-lekérdezések biztonságos formában történnek
+	AI freetext modul integráció
+		Chat kezelése backend oldalon
+		API használata tervgeneráláshoz
+		A készitett terv adatbázisban tárolása
+
+5. Követelménylista
+Reszponzív dizájn
+Egyszerű, letisztult és konzisztens UI
+Felhasználói regisztráció és bejelentkezés
+Menü megjelenítése
+Ezekben a lebontásokban kiválasztás érintéssel igy elvérve az almenüt
+AI funkció
+
