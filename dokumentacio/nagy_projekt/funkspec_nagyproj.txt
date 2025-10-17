@@ -21,3 +21,10 @@ Az AI nem része a jelenlegi kisprojektnek.
 2.2 Vágyálomrendszer
 
 A cél egy modern, személyre szabott edzéstervező alkalmazás fejlesztése, amely a felhasználók számára AI segítségével automatikusan állít össze céljaikhoz és adottságaikhoz igazított edzéstervet. Emellett a felhasználót animált jutalmakkal, illetve mérföldkövekkel jutalmazza. Ezenekívül a színsémáját az applikációnak személyre lehet szabni.
+
+
+3.1 Jelenlegi üzleti folyamatok modellje
+
+A felhasználók jelenleg manuálisan vagy véletlenszerűen kapnak edzésterveket, amelyek nem maradnak meg hosszabb távon.
+Az alkalmazás nem nyújt személyre szabott élményt, és nem képes figyelembe venni a felhasználó céljait, fizikai adottságait vagy fejlődését.
+Az edzéskövetés alapfunkciói elérhetők, de nincs visszajelzés, motivációs rendszer. Emellett az AI sem része a kisprojektbeli applikációnak.
