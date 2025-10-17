@@ -48,6 +48,10 @@ Folyamatleírás
 
 	-A napi feladatokat a rendszer megjeleníti, a gyakorlatok kipipálhatók.
 
+	-A teljesítést követően a felhasználó animációk segítségével jutalmat kap, illetve mérföldköveket érhet el.
+
+	-A felhasználó bármikor módosíthatja az adatait, és az AI ennek megfelelően újratervezi a programot.
+
 
 4. Rendszerhasználati esetek (Use Case-ek)
 
@@ -122,3 +126,4 @@ F10		AI újratervezés			AI új tervet generál frissített adatok alapján		Mag
 
 
 6. Nem-funkcionális követelmények
+
