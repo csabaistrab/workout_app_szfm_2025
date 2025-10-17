@@ -64,3 +64,43 @@ UC7	Gyakorlat kipipálása		Felhasználó		Feladat teljesítésének rögzítés
 UC8	Mérföldkő elérése		Rendszer		Jutalom és animáció megjelenítése
 UC9	AI újratervezés			Felhasználó / AI	Adatelemzés alapján új terv készítése
 UC10	Színmód beállítása		Felhasználó		Szinösszeállítás módosítása, akadálymentesítés
+
+4.2 Használati eset – részletes leírások
+
+UC4 – AI edzésterv generálás
+
+	-Szereplő: AI modul
+
+	-Cél: Egyedi edzésterv készítése a felhasználó adatai alapján
+
+	-Előfeltétel: Felhasználó kitöltötte az adatlapot és megadta célját
+
+	-Lépések:
+
+		-Rendszer lekéri a felhasználó paramétereit
+
+		-AI elemzi az adatokat és generál tervet
+
+		-Terv JSON formátumban mentésre kerül az adatbázisba
+
+		-Felhasználó jóváhagyhatja vagy újratervezést kérhet
+
+	-Utófeltétel: Edzésterv elmentve és megjelenítve
+
+UC7 – Gyakorlat kipipálása
+
+	-Szereplő: Felhasználó
+
+	-Cél: Napi gyakorlat elvégzésének jelzése
+
+	-Lépések:
+
+		-Napi edzéslista megnyitása
+
+		-Kipipálás érintéssel
+
+		-Rendszer frissíti a teljesítési arányt
+
+		-Mérföldkő esetén jutalom aktiválása
+
+	-Utófeltétel: Statisztika és jutalmak frissítve
