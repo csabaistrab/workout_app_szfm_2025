@@ -126,4 +126,12 @@ F10		AI újratervezés			AI új tervet generál frissített adatok alapján		Mag
 
 
 6. Nem-funkcionális követelmények
+TODO
 
+
+7. Funkció – követelmény megfeleltetés
+TODO
+
+
+8. Felhasználói felület (UI)
+TODO
