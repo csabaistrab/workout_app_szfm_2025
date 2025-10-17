@@ -7,3 +7,10 @@ A leírás a korábban elkészített követelményspecifikáció alapján kész�
 
 Az applikáció célja, hogy a felhasználók számára személyre szabott edzésterveket biztosítson, az AI segítségével.
 A rendszer lehetőséget nyújt regisztrációra, adatok megadására, edzéstervek létrehozására és követésére, valamint motivációs elemek (mérföldkövek, jutalmak, animációk) megjelenítésére.
+
+2.1 Jelenlegi helyzet
+
+A jelenlegi prototípus csak vendégfelhasználókat kezel.
+A felhasználóktól nevet, súlyt és magasságot kér, ez alapján kiszámolja a BMI-t, majd véletlenszerű gyakorlatokat rendel hozzá egy lokális adatbázisból.
+Az edzésterv csak az aktuális munkamenetig él, és az adatok nem kerülnek elmentésre.
+A felület alapfunkciókat tartalmaz, az edzések kipipálhatók, de nincs személyre szabás vagy tartós adatmentés.
