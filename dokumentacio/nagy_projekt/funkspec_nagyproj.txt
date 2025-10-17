@@ -47,3 +47,20 @@ Folyamatleírás
 	-Az elfogadott terv elmentésre kerül, és a felhasználó bármikor elérheti.
 
 	-A napi feladatokat a rendszer megjeleníti, a gyakorlatok kipipálhatók.
+
+
+4. Rendszerhasználati esetek (Use Case-ek)
+
+4.1 Használati esetek áttekintése
+
+ID	Név				Szereplő		Rövid leírás
+UC1	Regisztráció			Felhasználó		Új felhasználói fiók létrehozása
+UC2	Bejelentkezés			Felhasználó		Bejelentkezés a rendszerbe
+UC3	Adatok megadása			Felhasználó		Személyes és céladatok rögzítése
+UC4	AI edzésterv generálás		AI modul		Személyre szabott terv készítése
+UC5	Edzésterv elfogadása		Felhasználó		AI által generált terv jóváhagyása
+UC6	Napi edzés megjelenítése	Felhasználó		Napi gyakorlatok megtekintése
+UC7	Gyakorlat kipipálása		Felhasználó		Feladat teljesítésének rögzítése
+UC8	Mérföldkő elérése		Rendszer		Jutalom és animáció megjelenítése
+UC9	AI újratervezés			Felhasználó / AI	Adatelemzés alapján új terv készítése
+UC10	Színmód beállítása		Felhasználó		Szinösszeállítás módosítása, akadálymentesítés
