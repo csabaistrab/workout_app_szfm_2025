@@ -14,3 +14,5 @@ A jelenlegi prototípus csak vendégfelhasználókat kezel.
 A felhasználóktól nevet, súlyt és magasságot kér, ez alapján kiszámolja a BMI-t, majd véletlenszerű gyakorlatokat rendel hozzá egy lokális adatbázisból.
 Az edzésterv csak az aktuális munkamenetig él, és az adatok nem kerülnek elmentésre.
 A felület alapfunkciókat tartalmaz, az edzések kipipálhatók, de nincs személyre szabás vagy tartós adatmentés.
+Az AI nem része a jelenlegi kisprojektnek.
+
