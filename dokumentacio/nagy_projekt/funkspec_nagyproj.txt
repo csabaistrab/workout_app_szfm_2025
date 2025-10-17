@@ -8,6 +8,7 @@ A leírás a korábban elkészített követelményspecifikáció alapján kész�
 Az applikáció célja, hogy a felhasználók számára személyre szabott edzésterveket biztosítson, az AI segítségével.
 A rendszer lehetőséget nyújt regisztrációra, adatok megadására, edzéstervek létrehozására és követésére, valamint motivációs elemek (mérföldkövek, jutalmak, animációk) megjelenítésére.
 
+
 2.1 Jelenlegi helyzet
 
 A jelenlegi prototípus csak vendégfelhasználókat kezel.
@@ -16,3 +17,7 @@ Az edzésterv csak az aktuális munkamenetig él, és az adatok nem kerülnek el
 A felület alapfunkciókat tartalmaz, az edzések kipipálhatók, de nincs személyre szabás vagy tartós adatmentés.
 Az AI nem része a jelenlegi kisprojektnek.
 
+
+2.2 Vágyálomrendszer
+
+A cél egy modern, személyre szabott edzéstervező alkalmazás fejlesztése, amely a felhasználók számára AI segítségével automatikusan állít össze céljaikhoz és adottságaikhoz igazított edzéstervet. Emellett a felhasználót animált jutalmakkal, illetve mérföldkövekkel jutalmazza. Ezenekívül a színsémáját az applikációnak személyre lehet szabni.
