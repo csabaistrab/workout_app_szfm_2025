@@ -119,3 +119,6 @@ F7		Mérföldkő-rendszer		Jutalmak, animációk, hangok megjelenítése		Közep
 F8		Profil és beállítások		Adatelemzés, adatmódosítás, AI újratervezés		Magas
 F9		Színmód választás		Különböző témák, színvak mód támogatása			Közepes
 F10		AI újratervezés			AI új tervet generál frissített adatok alapján		Magas
+
+
+6. Nem-funkcionális követelmények
