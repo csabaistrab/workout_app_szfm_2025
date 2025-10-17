@@ -57,17 +57,17 @@ Folyamatleírás
 
 4.1 Használati esetek áttekintése
 
-ID	Név				Szereplő		Rövid leírás
-UC1	Regisztráció			Felhasználó		Új felhasználói fiók létrehozása
-UC2	Bejelentkezés			Felhasználó		Bejelentkezés a rendszerbe
-UC3	Adatok megadása			Felhasználó		Személyes és céladatok rögzítése
-UC4	AI edzésterv generálás		AI modul		Személyre szabott terv készítése
-UC5	Edzésterv elfogadása		Felhasználó		AI által generált terv jóváhagyása
-UC6	Napi edzés megjelenítése	Felhasználó		Napi gyakorlatok megtekintése
-UC7	Gyakorlat kipipálása		Felhasználó		Feladat teljesítésének rögzítése
-UC8	Mérföldkő elérése		Rendszer		Jutalom és animáció megjelenítése
-UC9	AI újratervezés			Felhasználó / AI	Adatelemzés alapján új terv készítése
-UC10	Színmód beállítása		Felhasználó		Szinösszeállítás módosítása, akadálymentesítés
+ID	Név							Szereplő			Rövid leírás
+UC1	Regisztráció				Felhasználó			Új felhasználói fiók létrehozása
+UC2	Bejelentkezés				Felhasználó			Bejelentkezés a rendszerbe
+UC3	Adatok megadása				Felhasználó			Személyes és céladatok rögzítése
+UC4	AI edzésterv generálás		AI modul			Személyre szabott terv készítése
+UC5	Edzésterv elfogadása		Felhasználó			AI által generált terv jóváhagyása
+UC6	Napi edzés megjelenítése	Felhasználó			Napi gyakorlatok megtekintése
+UC7	Gyakorlat kipipálása		Felhasználó			Feladat teljesítésének rögzítése
+UC8	Mérföldkő elérése			Rendszer			Jutalom és animáció megjelenítése
+UC9	AI újratervezés				Felhasználó / AI	Adatelemzés alapján új terv készítése
+UC10	Színmód beállítása		Felhasználó			Szinösszeállítás módosítása, akadálymentesítés
 
 4.2 Használati eset – részletes leírások
 
@@ -112,17 +112,17 @@ UC7 – Gyakorlat kipipálása
 
 5. Funkcionális követelmények
 
-Azonosító	Funkció				Leírás							Prioritás
-F1		Regisztráció / Bejelentkezés	Felhasználók azonosítása, jelszó-hash-elés		Magas
-F2		Adatmegadás			Alapadatok (súly, magasság, életkor, cél) bekérése	Magas
-F3		AI tervgenerálás		Egyéni edzésterv létrehozása				Magas
-F4		Edzésterv mentése		AI által készített terv tárolása			Magas
-F5		Napi edzéslista			Gyakorlatok napi bontásban megjelenítve			Magas
-F6		Gyakorlat kipipálása		Napi feladatok teljesítése				Magas
-F7		Mérföldkő-rendszer		Jutalmak, animációk, hangok megjelenítése		Közepes
-F8		Profil és beállítások		Adatelemzés, adatmódosítás, AI újratervezés		Magas
-F9		Színmód választás		Különböző témák, színvak mód támogatása			Közepes
-F10		AI újratervezés			AI új tervet generál frissített adatok alapján		Magas
+Azonosító	Funkció							Leírás												Prioritás
+F1			Regisztráció / Bejelentkezés	Felhasználók azonosítása, jelszó-hash-elés			Magas
+F2			Adatmegadás						Alapadatok (súly, magasság, életkor, cél) bekérése	Magas
+F3			AI tervgenerálás				Egyéni edzésterv létrehozása						Magas
+F4			Edzésterv mentése				AI által készített terv tárolása					Magas
+F5			Napi edzéslista					Gyakorlatok napi bontásban megjelenítve				Magas
+F6			Gyakorlat kipipálása			Napi feladatok teljesítése							Magas
+F7			Mérföldkő-rendszer				Jutalmak, animációk, hangok megjelenítése			Közepes
+F8			Profil és beállítások			Adatelemzés, adatmódosítás, AI újratervezés			Magas
+F9			Színmód választás				Különböző témák, színvak mód támogatása				Közepes
+F10			AI újratervezés					AI új tervet generál frissített adatok alapján		Magas
 
 
 6. Nem-funkcionális követelmények
@@ -135,3 +135,4 @@ TODO
 
 8. Felhasználói felület (UI)
 TODO
+
