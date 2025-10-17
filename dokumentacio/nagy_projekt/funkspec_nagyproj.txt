@@ -104,3 +104,18 @@ UC7 – Gyakorlat kipipálása
 		-Mérföldkő esetén jutalom aktiválása
 
 	-Utófeltétel: Statisztika és jutalmak frissítve
+
+
+5. Funkcionális követelmények
+
+Azonosító	Funkció				Leírás							Prioritás
+F1		Regisztráció / Bejelentkezés	Felhasználók azonosítása, jelszó-hash-elés		Magas
+F2		Adatmegadás			Alapadatok (súly, magasság, életkor, cél) bekérése	Magas
+F3		AI tervgenerálás		Egyéni edzésterv létrehozása				Magas
+F4		Edzésterv mentése		AI által készített terv tárolása			Magas
+F5		Napi edzéslista			Gyakorlatok napi bontásban megjelenítve			Magas
+F6		Gyakorlat kipipálása		Napi feladatok teljesítése				Magas
+F7		Mérföldkő-rendszer		Jutalmak, animációk, hangok megjelenítése		Közepes
+F8		Profil és beállítások		Adatelemzés, adatmódosítás, AI újratervezés		Magas
+F9		Színmód választás		Különböző témák, színvak mód támogatása			Közepes
+F10		AI újratervezés			AI új tervet generál frissített adatok alapján		Magas
