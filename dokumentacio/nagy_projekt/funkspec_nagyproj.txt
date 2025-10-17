@@ -1,0 +1,9 @@
+Edzőterv applikáció – Funkcionális specifikáció
+
+1. Bevezetés
+
+A dokumentum célja, hogy részletesen bemutassa az Edzőterv applikáció működését, funkcióit, felhasználói interakcióit, valamint az adatáramlás folyamatát.
+A leírás a korábban elkészített követelményspecifikáció alapján készült, és annak részletes technikai megvalósítását hivatott támogatni.
+
+Az applikáció célja, hogy a felhasználók számára személyre szabott edzésterveket biztosítson, az AI segítségével.
+A rendszer lehetőséget nyújt regisztrációra, adatok megadására, edzéstervek létrehozására és követésére, valamint motivációs elemek (mérföldkövek, jutalmak, animációk) megjelenítésére.
