@@ -28,3 +28,22 @@ A cél egy modern, személyre szabott edzéstervező alkalmazás fejlesztése, a
 A felhasználók jelenleg manuálisan vagy véletlenszerűen kapnak edzésterveket, amelyek nem maradnak meg hosszabb távon.
 Az alkalmazás nem nyújt személyre szabott élményt, és nem képes figyelembe venni a felhasználó céljait, fizikai adottságait vagy fejlődését.
 Az edzéskövetés alapfunkciói elérhetők, de nincs visszajelzés, motivációs rendszer. Emellett az AI sem része a kisprojektbeli applikációnak.
+
+
+3.2 Igényelt üzleti folyamatok modellje
+
+A fejlesztendő rendszer célja, hogy automatizált, AI-alapú, személyre szabott edzéstervezést és követést biztosítson. Ez alapján fognak a kiválasztott nap adott feladatai megjelenni.
+
+Folyamatleírás
+
+	-A felhasználó regisztrál és bejelentkezik az alkalmazásba.
+
+	-Az adatbekérő oldalon megadja a testsúlyát, magasságát, életkorát, valamint röviden leírja az edzés célját (pl. fogyás, izomnövelés, állóképesség javítása, szálkásítás, stb.).
+
+	-Az AI modul a megadott adatok alapján generál egy javasolt edzéstervet.
+
+	-A felhasználó elfogadhatja vagy kérhet módosítást.
+
+	-Az elfogadott terv elmentésre kerül, és a felhasználó bármikor elérheti.
+
+	-A napi feladatokat a rendszer megjeleníti, a gyakorlatok kipipálhatók.
