@@ -37,3 +37,11 @@ Frontend fejlesztő		Felhasználói felület tervezése és implementálása (Re
 Backend fejlesztő		Szerveroldali logika, API-k, autentikáció, AI integráció
 Adatbázis fejlesztő		Adatbázis-séma tervezése, CRUD műveletek
 AI integráció fejlesztő		AI API-hívások kezelése, edzéstervek generálása
+
+2.2. Projektmunkások és felelősségeik
+
+Név			Szerepkör		Főbb feladatok
+Müller Róbert		Frontend UI		Oldalak tervezése, reszponzív elrendezés, színmódok
+Istráb Csaba		Frontend JS		Interaktív UI elemek, API-hívások kezelése
+Bihari Levente		Backend fejlesztő	API, autentikáció, AI modul integráció
+Lendvai-Benyó Dániel	Adatbázis		Táblák, relációk, SQL műveletek, adattárolás
