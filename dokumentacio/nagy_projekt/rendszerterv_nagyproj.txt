@@ -198,3 +198,13 @@ Fő táblák:
 	-milestones (id, user_id, progress, reward)
 
 	-settings (id, user_id, theme_mode, accessibility_options)
+
+
+9. Tesztterv
+
+Teszt típusa		Leírás
+Egységteszt		API végpontok ellenőrzése
+Integrációs teszt	Frontend – backend kapcsolat
+Funkcionális teszt	Regisztráció, AI tervgenerálás, kipipálás
+Felhasználói teszt	UX, reszponzív megjelenés
+Biztonsági teszt	Jelszó hash, input validáció
