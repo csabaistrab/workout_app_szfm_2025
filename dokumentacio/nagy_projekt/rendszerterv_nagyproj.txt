@@ -185,3 +185,16 @@ Háromrétegű architektúra (MVC)
 -AI modul (külső API integráció)
 
 -Adatbázis réteg (MySQL)
+
+
+8. Adatbázis terv
+
+Fő táblák:
+
+	-users (id, email, password, weight, height, age, goal)
+
+	-workout_plans (id, user_id, json_plan, created_at)
+
+	-milestones (id, user_id, progress, reward)
+
+	-settings (id, user_id, theme_mode, accessibility_options)
