@@ -1,0 +1,28 @@
+Edzőterv applikáció - Rendszerterv
+
+1. A rendszer célja
+
+A rendszer célja egy modern, felhasználóbarát edzésterv-generáló és nyomon követő alkalmazás létrehozása, amely a felhasználók számára személyre szabott edzéseket biztosít az AI segítségével.
+Az alkalmazás célja, hogy motiválja a felhasználókat az egészséges életmódra, támogassa fejlődésüket, és megkönnyítse az edzéstervek követését.
+
+Amit a rendszer meg akar oldani:
+
+-Személyre szabott edzéstervek automatikus létrehozása az AI segítségével.
+
+-Felhasználói regisztráció és bejelentkezés biztonságos azonosítással.
+
+-Edzések és fejlődés nyomon követése, mérföldkövek elérése.
+
+-Felhasználói adatok frissítése és dinamikus edzésterv-újratervezés.
+
+-Motivációs elemek (jutalmak, animációk, hangok, értesítések).
+
+-Akadálymentesített és reszponzív felület biztosítása (színvak mód).
+
+Amit a rendszer nem csinál:
+
+-Nem helyettesít edzőt vagy orvosi szakvéleményt.
+
+-Nem biztosít fizikai aktivitás- vagy egészségügyi szenzoradatok integrációját (pl. pulzusmérés).
+
+-Nem tartalmaz közösségi funkciókat (pl. üzenetküldés, csoportos edzés).
