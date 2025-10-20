@@ -147,3 +147,18 @@ Főmenü:
 	-Mérföldkövek
 
 	-Beállítások
+
+
+6. Fizikai környezet
+
+6.1. Fejlesztő eszközök
+
+	-Frontend: React / Tailwind CSS
+
+	-Backend: Node.js
+
+	-Adatbázis: MongoDB
+
+	-AI integráció: OpenAI API
+
+	-Verziókezelés: GitHub
