@@ -104,3 +104,13 @@ Hét		Feladat
 	-Mérföldkő rendszer
 
 	-Profil és beállítások
+
+4.2. Nemfunkcionális követelmények
+
+	-Kevesebb, mint 3 mp válaszidő
+
+	-Hash-elt jelszavak
+
+	-Reszponzív és akadálymentes UI
+
+	-Stabil működés, hibakezelés
