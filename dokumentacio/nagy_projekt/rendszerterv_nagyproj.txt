@@ -135,3 +135,15 @@ Hét		Feladat
 	-Gyakorlat kipipálása
 
 	-Mérföldkő elérése
+
+5.3. Menü-hierarchia
+
+Főmenü:
+
+	-Profil
+
+	-Edzésterv
+
+	-Mérföldkövek
+
+	-Beállítások
