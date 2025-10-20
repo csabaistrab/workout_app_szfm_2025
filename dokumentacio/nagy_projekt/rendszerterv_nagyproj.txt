@@ -26,3 +26,14 @@ Amit a rendszer nem csinál:
 -Nem biztosít fizikai aktivitás- vagy egészségügyi szenzoradatok integrációját (pl. pulzusmérés).
 
 -Nem tartalmaz közösségi funkciókat (pl. üzenetküldés, csoportos edzés).
+
+
+2. Projekt terv
+
+2.1. Projektszerepkörök, felelősségek
+
+Szerepkör			Felelősség
+Frontend fejlesztő		Felhasználói felület tervezése és implementálása (React/HTML/CSS), animációk, UI logika
+Backend fejlesztő		Szerveroldali logika, API-k, autentikáció, AI integráció
+Adatbázis fejlesztő		Adatbázis-séma tervezése, CRUD műveletek
+AI integráció fejlesztő		AI API-hívások kezelése, edzéstervek generálása
