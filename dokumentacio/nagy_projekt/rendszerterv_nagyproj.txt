@@ -45,3 +45,12 @@ Müller Róbert		Frontend UI		Oldalak tervezése, reszponzív elrendezés, szín
 Istráb Csaba		Frontend JS		Interaktív UI elemek, API-hívások kezelése
 Bihari Levente		Backend fejlesztő	API, autentikáció, AI modul integráció
 Lendvai-Benyó Dániel	Adatbázis		Táblák, relációk, SQL műveletek, adattárolás
+
+2.3. Ütemterv
+
+Hét		Feladat
+1–2. hét	Követelményspecifikáció, funkcionális specifikáció elkészítése
+3–4. hét	Adatbázis és backend API alapok fejlesztése
+5–6. hét	Frontend prototípus, AI integráció
+7. hét		Mérföldkő- és motivációs rendszer megvalósítása
+8. hét		Tesztelés, hibajavítás, dokumentálás
