@@ -208,3 +208,12 @@ Integrációs teszt	Frontend – backend kapcsolat
 Funkcionális teszt	Regisztráció, AI tervgenerálás, kipipálás
 Felhasználói teszt	UX, reszponzív megjelenés
 Biztonsági teszt	Jelszó hash, input validáció
+
+
+10. Telepítési terv
+
+-Backend és adatbázis hosztolása
+
+-Frontend build deployálása
+
+-Környezeti változók (.env) beállítása (AI API key, DB URL)
