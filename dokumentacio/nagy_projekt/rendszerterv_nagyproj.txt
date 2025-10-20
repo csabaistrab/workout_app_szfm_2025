@@ -87,3 +87,20 @@ Hét		Feladat
 	-Napi feladatok megjelenítése, kipipálás, statisztika frissítése.
 
 	-Mérföldkő elérése -> jutalom és animáció.
+
+
+4. Követelmények
+
+4.1. Funkcionális követelmények
+
+	-Regisztráció / Bejelentkezés
+
+	-Adatmegadás
+
+	-AI tervgenerálás
+
+	-Edzésterv megjelenítés és mentés
+
+	-Mérföldkő rendszer
+
+	-Profil és beállítások
