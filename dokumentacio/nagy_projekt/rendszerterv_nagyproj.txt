@@ -66,3 +66,24 @@ Hét		Feladat
 -M4: Mérföldkő rendszer működik
 
 -M5: Teljes UI és reszponzív megjelenés kész
+
+
+3. Üzleti folyamatok modellje
+
+3.1. Üzleti szereplők
+
+	-Felhasználó – edzéstervet generál, követi az edzéseket.
+
+	-AI modul – személyre szabott tervet készít.
+
+	-Rendszeradminisztrátor – karbantartás, adatbázis kezelése.
+
+3.2. Üzleti folyamatok
+
+	-Felhasználó regisztrál, megadja adatait.
+
+	-AI edzéstervet generál, amit a felhasználó elfogad.
+
+	-Napi feladatok megjelenítése, kipipálás, statisztika frissítése.
+
+	-Mérföldkő elérése -> jutalom és animáció.
