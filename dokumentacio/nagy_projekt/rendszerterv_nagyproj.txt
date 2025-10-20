@@ -162,3 +162,26 @@ Főmenü:
 	-AI integráció: OpenAI API
 
 	-Verziókezelés: GitHub
+
+
+7. Architekturális terv
+
+7.1. Alkalmazott minta
+
+Háromrétegű architektúra (MVC)
+
+	-Model: adatbázis és adatok kezelése
+
+	-View: UI, reszponzív megjelenítés
+
+	-Controller: logika, AI integráció, API-k
+
+7.2. Fő komponensek
+
+-Frontend komponens (React)
+
+-Backend API (Express)
+
+-AI modul (külső API integráció)
+
+-Adatbázis réteg (MySQL)
