@@ -54,3 +54,15 @@ Hét		Feladat
 5–6. hét	Frontend prototípus, AI integráció
 7. hét		Mérföldkő- és motivációs rendszer megvalósítása
 8. hét		Tesztelés, hibajavítás, dokumentálás
+
+2.4. Mérföldkövek
+
+-M1: Alap backend (API + adatbázis) működik
+
+-M2: Felhasználói regisztráció és bejelentkezés
+
+-M3: AI-edzésterv generálás funkció
+
+-M4: Mérföldkő rendszer működik
+
+-M5: Teljes UI és reszponzív megjelenés kész
