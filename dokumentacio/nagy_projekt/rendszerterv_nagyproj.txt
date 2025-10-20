@@ -217,3 +217,12 @@ Biztonsági teszt	Jelszó hash, input validáció
 -Frontend build deployálása
 
 -Környezeti változók (.env) beállítása (AI API key, DB URL)
+
+
+11. Karbantartási terv
+
+-Rendszeres frissítések (AI API, könyvtárak)
+
+-Adatbázis mentés heti szinten
+
+-Hibajegyek kezelése GitHub issue-kon keresztül
