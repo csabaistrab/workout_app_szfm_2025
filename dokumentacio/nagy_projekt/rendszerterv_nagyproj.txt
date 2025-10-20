@@ -114,3 +114,24 @@ Hét		Feladat
 	-Reszponzív és akadálymentes UI
 
 	-Stabil működés, hibakezelés
+
+
+5. Funkcionális terv
+
+5.1. Rendszerszereplők
+
+	-Felhasználó
+
+	-AI modul
+
+	-Backend rendszer
+
+5.2. Fő használati esetek
+
+	-Regisztráció / bejelentkezés
+
+	-AI-edzésterv generálás
+
+	-Gyakorlat kipipálása
+
+	-Mérföldkő elérése
