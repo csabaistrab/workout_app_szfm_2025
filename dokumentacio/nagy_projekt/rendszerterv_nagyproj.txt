@@ -32,23 +32,23 @@ Amit a rendszer nem csinál:
 
 2.1. Projektszerepkörök, felelősségek
 
-Szerepkör			Felelősség
-Frontend fejlesztő		Felhasználói felület tervezése és implementálása (React/HTML/CSS), animációk, UI logika
-Backend fejlesztő		Szerveroldali logika, API-k, autentikáció, AI integráció
-Adatbázis fejlesztő		Adatbázis-séma tervezése, CRUD műveletek
+Szerepkör					Felelősség
+Frontend fejlesztő			Felhasználói felület tervezése és implementálása (React/HTML/CSS), animációk, UI logika
+Backend fejlesztő			Szerveroldali logika, API-k, autentikáció, AI integráció
+Adatbázis fejlesztő			Adatbázis-séma tervezése, CRUD műveletek
 AI integráció fejlesztő		AI API-hívások kezelése, edzéstervek generálása
 
 2.2. Projektmunkások és felelősségeik
 
-Név			Szerepkör		Főbb feladatok
-Müller Róbert		Frontend UI		Oldalak tervezése, reszponzív elrendezés, színmódok
-Istráb Csaba		Frontend JS		Interaktív UI elemek, API-hívások kezelése
-Bihari Levente		Backend fejlesztő	API, autentikáció, AI modul integráció
-Lendvai-Benyó Dániel	Adatbázis		Táblák, relációk, SQL műveletek, adattárolás
+Név						Szerepkör			Főbb feladatok
+Müller Róbert			Frontend UI			Oldalak tervezése, reszponzív elrendezés, színmódok
+Istráb Csaba			Frontend JS			Interaktív UI elemek, API-hívások kezelése
+Bihari Levente			Backend fejlesztő	API, autentikáció, AI modul integráció
+Lendvai-Benyó Dániel	Adatbázis			Táblák, relációk, SQL műveletek, adattárolás
 
 2.3. Ütemterv
 
-Hét		Feladat
+Hét			Feladat
 1–2. hét	Követelményspecifikáció, funkcionális specifikáció elkészítése
 3–4. hét	Adatbázis és backend API alapok fejlesztése
 5–6. hét	Frontend prototípus, AI integráció
@@ -202,12 +202,12 @@ Fő táblák:
 
 9. Tesztterv
 
-Teszt típusa		Leírás
-Egységteszt		API végpontok ellenőrzése
-Integrációs teszt	Frontend – backend kapcsolat
-Funkcionális teszt	Regisztráció, AI tervgenerálás, kipipálás
-Felhasználói teszt	UX, reszponzív megjelenés
-Biztonsági teszt	Jelszó hash, input validáció
+Teszt típusa			Leírás
+Egységteszt				API végpontok ellenőrzése
+Integrációs teszt		Frontend – backend kapcsolat
+Funkcionális teszt		Regisztráció, AI tervgenerálás, kipipálás
+Felhasználói teszt		UX, reszponzív megjelenés
+Biztonsági teszt		Jelszó hash, input validáció
 
 
 10. Telepítési terv
@@ -226,3 +226,4 @@ Biztonsági teszt	Jelszó hash, input validáció
 -Adatbázis mentés heti szinten
 
 -Hibajegyek kezelése GitHub issue-kon keresztül
+
