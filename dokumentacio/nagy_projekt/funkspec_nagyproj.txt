@@ -161,5 +161,13 @@ Beállítások oldal		Színmódok, akadálymentesítési opciók		Téma választ
 
 9. Fogalomszótár
 
+Fogalom		Meghatározás
+Felhasználó	Regisztrált személy, aki saját edzéstervvel rendelkezik
+AI modul	Mesterséges intelligencia, amely személyre szabott terveket készít
+Edzésterv	Heti és napi bontású feladatlista, mely bizonyos gyakorlatokból áll
+Mérföldkő	Jutalmazási rendszer az előrehaladásért, bizonyos számú nap után kaphat ilyeneket a felhasználó
+Frontend	A vizuális, felhasználó által látott réteg
+Backend		Az üzleti logika és adatkezelés
+
 
 
