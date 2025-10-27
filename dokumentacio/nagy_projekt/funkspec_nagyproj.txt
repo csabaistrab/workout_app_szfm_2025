@@ -127,47 +127,48 @@ F10			AI újratervezés					AI új tervet generál frissített adatok alapján		
 
 6. Nem-funkcionális követelmények
 
-Típus			Leírás
-Teljesítmény		Az oldal válaszideje < 3 mp
-Biztonság		Hash-elt jelszavak
-Felhasználói élmény	Reszponzív, animált, modern dizájn
-Akadálymentesség	Színvak mód, nagy kontraszt, olvashatóság
-AI etika		AI nem ad orvosi tanácsot, csak javaslatokat
-Stabilitás		Adatmentés és hibakezelés minden műveletnél
-Skálázhatóság		Több száz felhasználó egyidejű kezelése
+Típus					Leírás
+Teljesítmény			Az oldal válaszideje < 3 mp
+Biztonság				Hash-elt jelszavak
+Felhasználói élmény		Reszponzív, animált, modern dizájn
+Akadálymentesség		Színvak mód, nagy kontraszt, olvashatóság
+AI etika				AI nem ad orvosi tanácsot, csak javaslatokat
+Stabilitás				Adatmentés és hibakezelés minden műveletnél
+Skálázhatóság			Több száz felhasználó egyidejű kezelése
 
 
 7. Funkció – követelmény megfeleltetés
 
-Funkció				Kapcsolódó követelmény
+Funkció							Kapcsolódó követelmény
 Regisztráció / Bejelentkezés	Felhasználói azonosítás (K1)
-AI edzésterv generálás		Személyre szabott terv (K2)
-Mérföldkő rendszer		Motiváció és jutalmazás (K3)
-Színmód választás		Akadálymentes használat (K4)
+AI edzésterv generálás			Személyre szabott terv (K2)
+Mérföldkő rendszer				Motiváció és jutalmazás (K3)
+Színmód választás				Akadálymentes használat (K4)
 
 
 8. Felhasználói felület (UI)
 
-Oldal				Leírás						Fő funkciók
-Bejelentkezés / Regisztráció	Fiók létrehozása és belépés			Űrlap, adatellenőrzés
-Adatbekérő oldal		Testsúly, magasság, életkor, cél megadása	AI integráció
-AI Terv oldal			Javasolt edzésterv megtekintése és elfogadása	Terv mentése, módosítás
-Napi nézet			Aznapi gyakorlatok listája			Gyakorlat kipipálása, statisztika
-Profil oldal			Felhasználói adatok, mérföldkövek		Adatmódosítás, újratervezés
-Mérföldkő oldal			Jutalmak és animációk megjelenítése		Értesítések
-Beállítások oldal		Színmódok, akadálymentesítési opciók		Téma választás
+Oldal							Leírás											Fő funkciók
+Bejelentkezés / Regisztráció	Fiók létrehozása és belépés						Űrlap, adatellenőrzés
+Adatbekérő oldal				Testsúly, magasság, életkor, cél megadása		AI integráció
+AI Terv oldal					Javasolt edzésterv megtekintése és elfogadása	Terv mentése, módosítás
+Napi nézet						Aznapi gyakorlatok listája						Gyakorlat kipipálása, statisztika
+Profil oldal					Felhasználói adatok, mérföldkövek				Adatmódosítás, újratervezés
+Mérföldkő oldal					Jutalmak és animációk megjelenítése				Értesítések
+Beállítások oldal				Színmódok, akadálymentesítési opciók			Téma választás
 (Minden oldal mobil és desktop nézetben is reszponzív elrendezésben működik.)
 
 
 9. Fogalomszótár
 
-Fogalom		Meghatározás
-Felhasználó	Regisztrált személy, aki saját edzéstervvel rendelkezik
-AI modul	Mesterséges intelligencia, amely személyre szabott terveket készít
-Edzésterv	Heti és napi bontású feladatlista, mely bizonyos gyakorlatokból áll
-Mérföldkő	Jutalmazási rendszer az előrehaladásért, bizonyos számú nap után kaphat ilyeneket a felhasználó
-Frontend	A vizuális, felhasználó által látott réteg
-Backend		Az üzleti logika és adatkezelés
+Fogalom			Meghatározás
+Felhasználó		Regisztrált személy, aki saját edzéstervvel rendelkezik
+AI modul		Mesterséges intelligencia, amely személyre szabott terveket készít
+Edzésterv		Heti és napi bontású feladatlista, mely bizonyos gyakorlatokból áll
+Mérföldkő		Jutalmazási rendszer az előrehaladásért, bizonyos számú nap után kaphat ilyeneket a felhasználó
+Frontend		A vizuális, felhasználó által látott réteg
+Backend			Az üzleti logika és adatkezelés
+
 
 
 
