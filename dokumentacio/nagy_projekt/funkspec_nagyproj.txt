@@ -138,10 +138,16 @@ Skálázhatóság		Több száz felhasználó egyidejű kezelése
 
 
 7. Funkció – követelmény megfeleltetés
-TODO
+
+Funkció				Kapcsolódó követelmény
+Regisztráció / Bejelentkezés	Felhasználói azonosítás (K1)
+AI edzésterv generálás		Személyre szabott terv (K2)
+Mérföldkő rendszer		Motiváció és jutalmazás (K3)
+Színmód választás		Akadálymentes használat (K4)
 
 
 8. Felhasználói felület (UI)
 TODO
+
 
 
