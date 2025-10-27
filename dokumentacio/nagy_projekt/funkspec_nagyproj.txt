@@ -147,7 +147,18 @@ Színmód választás		Akadálymentes használat (K4)
 
 
 8. Felhasználói felület (UI)
-TODO
+
+Oldal				Leírás						Fő funkciók
+Bejelentkezés / Regisztráció	Fiók létrehozása és belépés			Űrlap, adatellenőrzés
+Adatbekérő oldal		Testsúly, magasság, életkor, cél megadása	AI integráció
+AI Terv oldal			Javasolt edzésterv megtekintése és elfogadása	Terv mentése, módosítás
+Napi nézet			Aznapi gyakorlatok listája			Gyakorlat kipipálása, statisztika
+Profil oldal			Felhasználói adatok, mérföldkövek		Adatmódosítás, újratervezés
+Mérföldkő oldal			Jutalmak és animációk megjelenítése		Értesítések
+Beállítások oldal		Színmódok, akadálymentesítési opciók		Téma választás
+(Minden oldal mobil és desktop nézetben is reszponzív elrendezésben működik.)
+
+
 
 
 
