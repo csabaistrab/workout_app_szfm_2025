@@ -159,6 +159,7 @@ Beállítások oldal		Színmódok, akadálymentesítési opciók		Téma választ
 (Minden oldal mobil és desktop nézetben is reszponzív elrendezésben működik.)
 
 
+9. Fogalomszótár
 
 
 
