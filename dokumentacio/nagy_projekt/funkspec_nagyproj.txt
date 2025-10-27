@@ -126,7 +126,15 @@ F10			AI újratervezés					AI új tervet generál frissített adatok alapján		
 
 
 6. Nem-funkcionális követelmények
-TODO
+
+Típus			Leírás
+Teljesítmény		Az oldal válaszideje < 3 mp
+Biztonság		Hash-elt jelszavak
+Felhasználói élmény	Reszponzív, animált, modern dizájn
+Akadálymentesség	Színvak mód, nagy kontraszt, olvashatóság
+AI etika		AI nem ad orvosi tanácsot, csak javaslatokat
+Stabilitás		Adatmentés és hibakezelés minden műveletnél
+Skálázhatóság		Több száz felhasználó egyidejű kezelése
 
 
 7. Funkció – követelmény megfeleltetés
@@ -135,4 +143,5 @@ TODO
 
 8. Felhasználói felület (UI)
 TODO
+
 
