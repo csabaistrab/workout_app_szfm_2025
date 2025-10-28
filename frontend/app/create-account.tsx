@@ -1,10 +1,10 @@
 import { View, StyleSheet } from 'react-native';
-import LoginForm from './_components/auth/LoginForm';
+import CreateAccountForm from './_components/auth/CreateAccountForm';
 
-export default function LoginScreen() {
+export default function CreateAccountScreen() {
   return (
     <View style={styles.container}>
-      <LoginForm />
+      <CreateAccountForm />
     </View>
   );
 }
