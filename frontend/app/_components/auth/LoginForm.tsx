@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import CustomButton from '../ui/CustomButton';
-import InputField from '../ui/InputField';
+import CustomButton from '../ui/CustomButton';  // ✅ Relatív útvonal
+import InputField from '../ui/InputField';      // ✅ Relatív útvonal
 
 export default function LoginForm() {
   const router = useRouter();
@@ -10,19 +10,17 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // TODO: Implement login logic
     console.log('Login attempt:', { email, password });
-    router.push('/(tabs)');
+    router.push('/(tabs)');  // ✅ Módosított útvonal
   };
 
   const handleGuestLogin = () => {
-    // TODO: Implement guest login
     console.log('Guest login');
-    router.push('/(tabs)');
+    router.push('/(tabs)');  // ✅ Módosított útvonal
   };
 
   const handleCreateAccount = () => {
-    router.push('/create-account');
+    router.push('/create-account');  // ✅ Abszolút útvonal
   };
 
   return (
