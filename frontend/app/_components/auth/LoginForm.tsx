@@ -48,22 +48,26 @@ export default function LoginForm() {
       />
       
       <Text style={styles.orText}>or</Text>
-      
-      <CustomButton 
-        title="Login as Guest" 
-        onPress={handleGuestLogin}
-        variant="secondary"
-      />
-      
+
+      <View style={styles.buttonRow}>
+        <CustomButton
+          title="Login as Guest"
+          onPress={handleGuestLogin}
+          variant="secondary"
+          style={{ flex: 1, marginRight: 8 }}
+        />
+
+        <CustomButton
+          title="Create account"
+          onPress={handleCreateAccount}
+          variant="secondary"
+          style={{ flex: 1, marginLeft: 8 }}
+        />
+      </View>
+
       <Text style={styles.footerText}>
         By clicking continue, you agree to our Terms of Service and Privacy Policy
       </Text>
-      
-      <CustomButton 
-        title="Create account" 
-        onPress={handleCreateAccount}
-        variant="secondary"
-      />
     </View>
   );
 }
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   title: {
     fontSize: 24,
@@ -83,13 +87,19 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 32,
-    color: '#666',
+    marginBottom: 4,
+    color: '#c5c5c5ff',
   },
   orText: {
     textAlign: 'center',
     marginVertical: 16,
     color: '#666',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 8,
   },
   footerText: {
     textAlign: 'center',

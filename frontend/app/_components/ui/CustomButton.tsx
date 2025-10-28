@@ -1,17 +1,19 @@
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 interface CustomButtonProps {
   title: string;
   onPress: () => void;
   variant?: 'primary' | 'secondary';
+  style?: StyleProp<ViewStyle>;
 }
 
-export default function CustomButton({ title, onPress, variant = 'primary' }: CustomButtonProps) {
+export default function CustomButton({ title, onPress, variant = 'primary', style }: CustomButtonProps) {
   return (
     <TouchableOpacity 
       style={[
         styles.button,
-        variant === 'primary' ? styles.primary : styles.secondary
+        variant === 'primary' ? styles.primary : styles.secondary,
+        style,
       ]} 
       onPress={onPress}
     >
