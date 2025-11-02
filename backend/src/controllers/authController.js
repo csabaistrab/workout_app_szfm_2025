@@ -97,3 +97,12 @@ export const updateProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    // Update fields if provided
+    if (age) user.age = age;
+    if (weight) user.weight = weight;
+    if (height) user.height = height;
+    if (fitnessLevel) user.fitnessLevel = fitnessLevel;
+    if (workoutPreferences) user.workoutPreferences = workoutPreferences;
+
+    await user.save();
