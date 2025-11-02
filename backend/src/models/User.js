@@ -58,5 +58,18 @@ userSchema.set("toJSON", {
   }
 });
 
+// Password verification method
+userSchema.methods.verifyPassword = async function(password) {
+  return bcrypt.compare(password, this.passwordHash);
+};
+
+// Pre-save middleware to hash password
+userSchema.pre('save', async function(next) {
+  if (this.isModified('passwordHash')) {
+    const salt = await bcrypt.genSalt(10);
+    this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
+  }
+  next();
+});
 
 export default mongoose.model('User', userSchema);
