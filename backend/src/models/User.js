@@ -48,6 +48,15 @@ const userSchema = new mongoose.Schema({
   versionKey: false 
 });
 
+// Remove sensitive data when converting to JSON
+userSchema.set("toJSON", {
+  transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.passwordHash;
+    return ret;
+  }
+});
 
 
 export default mongoose.model('User', userSchema);
