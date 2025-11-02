@@ -38,7 +38,7 @@ export const register = async (req, res) => {
       fitnessLevel,
       workoutPreferences
     });
-    
+
     await user.save();
 
     // Generate token
@@ -53,3 +53,7 @@ export const register = async (req, res) => {
     res.status(500).json({ message: 'Error creating user', error: error.message });
   }
 };
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
