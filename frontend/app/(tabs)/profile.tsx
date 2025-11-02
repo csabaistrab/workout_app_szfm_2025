@@ -1,6 +1,6 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
-import ProfileHeader from '../../_components/profile/ProfileHeader';
-import StatsCard from '../../_components/profile/StatsCard';
+import ProfileHeader from '../_components/profile/ProfileHeader';
+import StatsCard from '../_components/profile/StatsCard';
 
 export default function ProfileScreen() {
   // Mock data - később helyettesíted valós adatokkal
