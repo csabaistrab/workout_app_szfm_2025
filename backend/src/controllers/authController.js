@@ -63,3 +63,9 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
+
+      // Verify password
+    const isValid = await user.verifyPassword(password);
+    if (!isValid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
