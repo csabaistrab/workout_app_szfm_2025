@@ -38,3 +38,18 @@ export const register = async (req, res) => {
       fitnessLevel,
       workoutPreferences
     });
+    
+    await user.save();
+
+    // Generate token
+    const token = generateToken(user);
+
+    res.status(201).json({
+      token,
+      user: user.toJSON()
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Error creating user', error: error.message });
+  }
+};
