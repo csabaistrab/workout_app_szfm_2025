@@ -1,4 +1,6 @@
 import Workout from "../models/Workout.js";
+import User from "../models/User.js";
+import { generateAIWorkoutPlan, getExerciseRecommendations } from "../services/aiService.js";
 
 // BMI calculation
 const calculateBMI = (weight, height) => {
@@ -65,23 +67,21 @@ export const updateWorkout = async (req, res) => {
   }
 };
 
-// POST /api/workouts/generate { weight, height }
+// POST /api/workouts/generate
 export const generatePlan = async (req, res) => {
   try {
-    const { weight, height } = req.body;
-    if (!weight || !height) {
-      return res.status(400).json({ message: "Weight and height required" });
+    // Get user from JWT token (set by auth middleware)
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    const bmi = calculateBMI(weight, height);
+    const bmi = calculateBMI(user.weight, user.height);
 
-    let category = "normal";
-    if (bmi < 18.5) category = "underweight";
-    else if (bmi < 25) category = "normal";
-    else if (bmi < 30) category = "overweight";
-    else category = "obese";
-
-    const multiplier = workoutPlans[category].multiplier;
+    // Get AI-generated workout plan
+    const aiPlan = await generateAIWorkoutPlan(user);
+    
+    // Store the raw AI plan for reference
     const personalizedWorkouts = [];
 
     // For each day pick a random subset of exercises (between 5 and 10 items)
