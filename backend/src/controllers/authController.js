@@ -106,3 +106,10 @@ export const updateProfile = async (req, res) => {
     if (workoutPreferences) user.workoutPreferences = workoutPreferences;
 
     await user.save();
+
+    res.json({ user: user.toJSON() });
+  } catch (error) {
+    console.error('Profile update error:', error);
+    res.status(500).json({ message: 'Error updating profile', error: error.message });
+  }
+};
