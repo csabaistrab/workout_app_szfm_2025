@@ -82,3 +82,18 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Error during login', error: error.message });
   }
 };
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { 
+      age, 
+      weight, 
+      height, 
+      fitnessLevel, 
+      workoutPreferences 
+    } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
