@@ -23,4 +23,3 @@ The workout plan should:
 
 Format the response as a structured workout plan for 5 days.`;
 };
-
