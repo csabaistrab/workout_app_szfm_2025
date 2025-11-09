@@ -11,12 +11,13 @@ export default function LoginForm() {
 
   const handleLogin = () => {
     console.log('Login attempt:', { email, password });
-    router.push('/(tabs)');  // ✅ Módosított útvonal
+    // Replace current route so the login screen is not left in the history
+    router.replace('/(tabs)');
   };
 
   const handleGuestLogin = () => {
     console.log('Guest login');
-    router.push('/(tabs)');  // ✅ Módosított útvonal
+    router.replace('/(tabs)');
   };
 
   const handleCreateAccount = () => {
