@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet } from 'react-native';
+import {View, ScrollView, StyleSheet } from 'react-native';
 import ProfileHeader from '../_components/profile/ProfileHeader';
 import StatsCard from '../_components/profile/StatsCard';
 
