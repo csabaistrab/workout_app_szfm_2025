@@ -17,6 +17,10 @@ if (missingEnvVars.length > 0) {
   process.exit(1);
 }
 
+if (!process.env.OPENAI_API_KEY) {
+  console.warn('⚠️ OPENAI_API_KEY not set — AI features will be disabled or fallback to heuristic plans');
+}
+
 const app = express();
 
 // Middleware
