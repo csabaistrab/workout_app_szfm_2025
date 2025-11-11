@@ -82,3 +82,8 @@ export async function login(email: string, password: string) {
   }
   return body;
 }
+
+export async function logout() {
+  await AsyncStorage.removeItem('authToken');
+  await AsyncStorage.removeItem('user');
+}
