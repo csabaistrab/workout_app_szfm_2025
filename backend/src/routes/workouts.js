@@ -1,15 +1,14 @@
 import express from "express";
 import { getAllWorkouts, updateWorkout, generatePlan } from "../controllers/workoutController.js";
+import { authenticateToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// GET /api/workouts?week=1&day=1
-router.get("/", getAllWorkouts);
-
-// PUT /api/workouts/:id
-router.put("/:id", updateWorkout);
-
-// POST /api/workouts/generate
+// Public: POST /api/workouts/generate (supports guest payload or authenticated user)
 router.post("/generate", generatePlan);
+
+// Protected routes: require authentication
+router.get("/", authenticateToken, getAllWorkouts);
+router.put("/:id", authenticateToken, updateWorkout);
 
 export default router;
