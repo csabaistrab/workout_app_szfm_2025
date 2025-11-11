@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import CustomButton from '../ui/CustomButton';  // ✅ Relatív útvonal
 import InputField from '../ui/InputField';      // ✅ Relatív útvonal
@@ -10,9 +10,16 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    console.log('Login attempt:', { email, password });
-    // Replace current route so the login screen is not left in the history
-    router.replace('/(tabs)');
+    (async () => {
+      try {
+        const res = await login(email, password);
+        console.log('Login success', res);
+        router.replace(`/home?name=${encodeURIComponent(res.user?.name || email)}`);
+      } catch (err: any) {
+        console.error('Login failed', err);
+        Alert.alert('Hiba', err?.message || 'Bejelentkezés sikertelen');
+      }
+    })();
   };
 
   const handleGuestLogin = () => {
