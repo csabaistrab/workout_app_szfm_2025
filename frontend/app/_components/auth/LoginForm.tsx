@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import CustomButton from '../ui/CustomButton';  // ✅ Relatív útvonal
 import InputField from '../ui/InputField';      // ✅ Relatív útvonal
+import { login } from '../../../services/authService';
 
 export default function LoginForm() {
   const router = useRouter();
