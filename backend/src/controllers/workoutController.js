@@ -70,10 +70,27 @@ export const updateWorkout = async (req, res) => {
 // POST /api/workouts/generate
 export const generatePlan = async (req, res) => {
   try {
-    // Get user from JWT token (set by auth middleware)
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    // Support two modes:
+    // 1) Authenticated user: use stored profile (req.user)
+    // 2) Guest: accept weight/height in request body
+    let user = null;
+    if (req.user && req.user.id) {
+      user = await User.findById(req.user.id);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+    } else {
+      // Guest flow expects weight & height in body
+      const { weight, height } = req.body;
+      if (!weight || !height) {
+        return res.status(400).json({ message: 'Weight and height required for guest plan' });
+      }
+      user = {
+        age: req.body.age || 30,
+        weight: Number(weight),
+        height: Number(height),
+        fitnessLevel: req.body.fitnessLevel || 'beginner',
+        workoutPreferences: req.body.workoutPreferences || { focusAreas: [], timePerSession: 30 },
+        id: null
+      };
     }
 
     const bmi = calculateBMI(user.weight, user.height);
