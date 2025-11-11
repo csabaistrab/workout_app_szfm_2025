@@ -8,8 +8,8 @@ import connectDB from "./config/db.js";
 
 dotenv.config();
 
-// Validate required environment variables
-const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET', 'OPENAI_API_KEY'];
+// Validate required environment variables (OPENAI_API_KEY is optional for local/dev)
+const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
 if (missingEnvVars.length > 0) {
