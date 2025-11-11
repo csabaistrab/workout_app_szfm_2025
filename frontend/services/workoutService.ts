@@ -1,11 +1,19 @@
 // frontend/services/workoutService.ts
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Pick a sensible default depending on runtime.
 // - Android emulators need 10.0.2.2 to reach host machine's localhost
 // - iOS simulator and web can use localhost
 // - Real devices should replace with PC LAN IP (e.g. http://192.168.1.100:3000/api)
 export const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:3000/api' : 'http://localhost:3000/api';
+
+async function getAuthHeaders() {
+  const token = await AsyncStorage.getItem('authToken');
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  return headers;
+}
 
 export async function generateWorkoutPlan(weight: number, height: number) {
   const res = await fetch(`${API_URL}/workouts/generate`, {
