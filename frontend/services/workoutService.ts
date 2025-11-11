@@ -16,9 +16,10 @@ async function getAuthHeaders() {
 }
 
 export async function generateWorkoutPlan(weight: number, height: number) {
+  const headers = await getAuthHeaders();
   const res = await fetch(`${API_URL}/workouts/generate`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify({ weight, height }),
   });
 
@@ -29,7 +30,8 @@ export async function generateWorkoutPlan(weight: number, height: number) {
 
 export async function fetchWorkouts(week: number, day?: number) {
   const url = `${API_URL}/workouts?week=${week}${day ? `&day=${day}` : ""}`;
-  const res = await fetch(url);
+  const headers = await getAuthHeaders();
+  const res = await fetch(url, { headers });
 
   if (!res.ok) throw new Error("Failed to fetch workouts");
 
@@ -37,9 +39,10 @@ export async function fetchWorkouts(week: number, day?: number) {
 }
 
 export async function updateWorkout(id: string, update: object) {
+  const headers = await getAuthHeaders();
   const res = await fetch(`${API_URL}/workouts/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(update),
   });
 
