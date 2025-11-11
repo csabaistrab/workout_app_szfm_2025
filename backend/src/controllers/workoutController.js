@@ -95,10 +95,24 @@ export const generatePlan = async (req, res) => {
 
     const bmi = calculateBMI(user.weight, user.height);
 
-    // Get AI-generated workout plan
-    const aiPlan = await generateAIWorkoutPlan(user);
+    // Determine category & multiplier (keeps previous heuristic if AI isn't used directly)
+    let category = "normal";
+    if (bmi < 18.5) category = "underweight";
+    else if (bmi < 25) category = "normal";
+    else if (bmi < 30) category = "overweight";
+    else category = "obese";
+
+    const multiplier = workoutPlans[category].multiplier;
+
+    // Get AI-generated workout plan (optional enrichment)
+    let aiPlan = null;
+    try {
+      aiPlan = await generateAIWorkoutPlan(user);
+    } catch (err) {
+      console.warn('AI plan generation failed, falling back to heuristic plan', err?.message || err);
+    }
     
-    // Store the raw AI plan for reference
+    // Store the raw AI plan for reference (returned to client but not required for DB)
     const personalizedWorkouts = [];
 
     // For each day pick a random subset of exercises (between 5 and 10 items)
@@ -130,7 +144,12 @@ export const generatePlan = async (req, res) => {
     await Workout.deleteMany(); // clear previous
     const savedPlan = await Workout.insertMany(personalizedWorkouts);
 
-    res.json({ bmi: bmi.toFixed(1), category, plan: savedPlan });
+    res.json({
+      bmi: bmi.toFixed(1),
+      category,
+      plan: savedPlan,
+      aiRaw: aiPlan ? aiPlan.rawPlan : null
+    });
   } catch (error) {
     res.status(500).json({ message: "Error generating plan", error });
   }
