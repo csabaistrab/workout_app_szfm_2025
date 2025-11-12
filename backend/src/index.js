@@ -8,7 +8,7 @@ import connectDB from "./config/db.js";
 
 dotenv.config();
 
-// Validate required environment variables (OPENAI_API_KEY is optional for local/dev)
+// Validate required environment variables (GOOGLE_API_KEY is optional for local/dev)
 const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
@@ -17,8 +17,8 @@ if (missingEnvVars.length > 0) {
   process.exit(1);
 }
 
-if (!process.env.OPENAI_API_KEY) {
-  console.warn('⚠️ OPENAI_API_KEY not set — AI features will be disabled or fallback to heuristic plans');
+if (!process.env.GOOGLE_API_KEY) {
+  console.warn('⚠️ GOOGLE_API_KEY not set — AI features will be disabled or fallback to heuristic plans');
 }
 
 const app = express();
