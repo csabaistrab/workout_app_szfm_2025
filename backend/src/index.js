@@ -1,12 +1,10 @@
+import 'dotenv/config';
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 import workoutRoutes from "./routes/workouts.js";
 import authRoutes from "./routes/auth.js";
 import connectDB from "./config/db.js";
-
-dotenv.config();
 
 // Validate required environment variables (GOOGLE_API_KEY is optional for local/dev)
 const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
