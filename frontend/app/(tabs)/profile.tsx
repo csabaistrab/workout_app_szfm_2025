@@ -1,10 +1,11 @@
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import ProfileHeader from '../_components/profile/ProfileHeader';
 import StatsCard from '../_components/profile/StatsCard';
 import CustomButton from '../_components/ui/CustomButton';
 
-export default function ProfileScreen() {
+export default function ProfileScreen(): React.ReactElement {
   const router = useRouter();
   // Mock data - később helyettesíted valós adatokkal
   const userData = {
