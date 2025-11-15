@@ -1,7 +1,6 @@
 // app/(tabs)/_layout.tsx
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Text } from 'react-native';
 
 import CustomTabBar from '@/components/custom-tab-bar';
 import { IconSymbol } from '@/components/ui/icon-symbol';

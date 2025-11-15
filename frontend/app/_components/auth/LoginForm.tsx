@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import CustomButton from '../ui/CustomButton';  // ✅ Relatív útvonal
-import InputField from '../ui/InputField';      // ✅ Relatív útvonal
-import { login } from '../../../services/authService';
+import CustomButton from '../ui/CustomButton';
+import InputField from '../ui/InputField';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -11,25 +10,24 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    (async () => {
-      try {
-        const res = await login(email, password);
-        console.log('Login success', res);
-        router.replace(`/home?name=${encodeURIComponent(res.user?.name || email)}`);
-      } catch (err: any) {
-        console.error('Login failed', err);
-        Alert.alert('Hiba', err?.message || 'Bejelentkezés sikertelen');
-      }
-    })();
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+    
+    console.log('Login attempt:', { email, password });
+    // Navigate to tabs - explicit módon
+    router.push('/(tabs)');
   };
 
   const handleGuestLogin = () => {
     console.log('Guest login');
-    router.replace('/(tabs)');
+    // Navigate to tabs as guest
+    router.push('/(tabs)');
   };
 
   const handleCreateAccount = () => {
-    router.push('/create-account' as unknown as any);  // bypass strict route typings
+    router.push('/create-account');
   };
 
   return (
