@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import ProfileHeader from '../_components/profile/ProfileHeader';
 import StatsCard from '../_components/profile/StatsCard';
@@ -18,7 +19,15 @@ export default function ProfileScreen(): React.ReactElement {
     currentWeek: 3
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('authToken');
+      await AsyncStorage.removeItem('user');
+      await AsyncStorage.removeItem('userName');
+      await AsyncStorage.removeItem('isGuest');
+    } catch (e) {
+      console.warn('Failed to clear storage on logout', e);
+    }
     // Replace navigation so user can't go back to protected screens
     router.replace('/login');
   };

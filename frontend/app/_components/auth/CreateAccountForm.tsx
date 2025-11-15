@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../ui/CustomButton';
 import InputField from '../ui/InputField';
 import { register } from '../../../services/authService';
@@ -21,38 +22,54 @@ export default function CreateAccountForm() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleCreateAccount = () => {
-    (async () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleCreateAccount = async () => {
+    if (loading) return;
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      Alert.alert('Hiba', 'Kérlek töltsd ki az email és jelszó mezőket');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const payload = {
+        name: formData.username || formData.email,
+        email: formData.email,
+        password: formData.password,
+        age: Number(formData.age) || 0,
+        weight: Number(formData.weight) || 0,
+        height: Number(formData.height) || 0,
+        fitnessLevel: 'beginner',
+        workoutPreferences: { focusAreas: [], timePerSession: 30 }
+      };
+
+      const res = await register(payload);
+      console.log('Registration response', res);
+
+      // Try to generate a plan afterwards but don't block navigation on failure
+      generateWorkoutPlan(payload.weight, payload.height).then(planRes => {
+        console.log('Plan generated after registration', planRes);
+      }).catch(planErr => {
+        console.warn('Plan generation failed after registration', planErr);
+      });
+
+      // Persist display name so Home can read it on native
       try {
-        const payload = {
-          name: formData.username || formData.email,
-          email: formData.email,
-          password: formData.password,
-          age: Number(formData.age),
-          weight: Number(formData.weight),
-          height: Number(formData.height),
-          fitnessLevel: 'beginner',
-          workoutPreferences: { focusAreas: [], timePerSession: 30 }
-        };
-
-        const res = await register(payload);
-        console.log('Registration response', res);
-
-        // After successful registration, request backend to generate a plan
-        try {
-          const planRes = await generateWorkoutPlan(payload.weight, payload.height);
-          console.log('Plan generated after registration', planRes);
-        } catch (planErr) {
-          console.warn('Plan generation failed after registration', planErr);
-        }
-
-        // Navigate to main tabs/home with user name
-        router.replace(`/home?name=${encodeURIComponent(payload.name)}`);
-      } catch (err: any) {
-        console.error('Register failed', err);
-        Alert.alert('Hiba', err?.message || 'Nem sikerült regisztrálni');
+        await AsyncStorage.setItem('userName', payload.name);
+      } catch (e) {
+        console.warn('Failed to persist userName', e);
       }
-    })();
+
+      // Navigate to tab layout which works reliably on native
+      router.replace('/(tabs)');
+    } catch (err: any) {
+      console.error('Register failed', err);
+      Alert.alert('Hiba', err?.message || 'Nem sikerült regisztrálni');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLogin = () => {
@@ -107,6 +124,7 @@ export default function CreateAccountForm() {
       <CustomButton 
         title="Continue" 
         onPress={handleCreateAccount}
+        loading={loading}
       />
       
       <Text style={styles.orText}>or</Text>

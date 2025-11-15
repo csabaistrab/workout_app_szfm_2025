@@ -1,36 +1,47 @@
-import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, StyleProp, ViewStyle } from 'react-native';
 
 interface CustomButtonProps {
   title: string;
-  onPress: (event: GestureResponderEvent) => void;
+  onPress: () => void | Promise<void>;
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
+  loading?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function CustomButton({ 
   title, 
   onPress, 
   variant = 'primary',
-  disabled = false 
+  disabled = false,
+  loading = false,
+  style,
 }: CustomButtonProps) {
+  const isDisabled = disabled || loading;
   return (
     <TouchableOpacity 
       style={[
         styles.button,
         variant === 'primary' ? styles.primary : styles.secondary,
-        disabled && styles.disabled
+        isDisabled && styles.disabled,
+        // allow caller to override layout (kept last so overrides apply)
+        style,
       ]} 
       onPress={onPress}
-      disabled={disabled}
+      disabled={isDisabled}
       activeOpacity={0.7}
     >
-      <Text style={[
-        styles.text,
-        variant === 'primary' ? styles.primaryText : styles.secondaryText,
-        disabled && styles.disabledText
-      ]}>
-        {title}
-      </Text>
+      {loading ? (
+        <ActivityIndicator color={variant === 'primary' ? '#fff' : '#007AFF'} />
+      ) : (
+        <Text style={[
+          styles.text,
+          variant === 'primary' ? styles.primaryText : styles.secondaryText,
+          isDisabled && styles.disabledText
+        ]}>
+          {title}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }

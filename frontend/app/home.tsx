@@ -7,7 +7,9 @@ import { Week } from './types';
 
 export default function Home() {
   const router = useRouter();
-  const { name } = useLocalSearchParams();
+  const params = useLocalSearchParams();
+  const paramName = (params.name as string) || null;
+  const [name, setName] = useState<string | null>(paramName);
   const [weeks, setWeeks] = useState<Week[]>([]);
   const [loading, setLoading] = useState(true);
   const [bmi, setBmi] = useState<string | null>(null);
@@ -41,17 +43,26 @@ export default function Home() {
   );
 
   useEffect(() => {
-    const loadBmi = async () => {
+    const loadBmiAndName = async () => {
       try {
         const stored = await AsyncStorage.getItem('userBmi');
         if (stored) setBmi(stored);
+
+        // If a name param exists, persist it; otherwise, try to load stored name
+        if (paramName) {
+          setName(paramName);
+          await AsyncStorage.setItem('userName', paramName);
+        } else {
+          const storedName = await AsyncStorage.getItem('userName');
+          if (storedName) setName(storedName);
+        }
       } catch (err) {
-        console.error('Error loading BMI:', err);
+        console.error('Error loading BMI or name:', err);
       }
     };
 
-    loadBmi();
-  }, []);
+    loadBmiAndName();
+  }, [paramName]);
 if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
