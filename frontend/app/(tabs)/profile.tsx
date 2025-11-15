@@ -1,4 +1,5 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import ProfileHeader from '../_components/profile/ProfileHeader';
 import StatsCard from '../_components/profile/StatsCard';
 import CustomButton from '../_components/ui/CustomButton';
