@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import CustomButton from '../ui/CustomButton';
 import InputField from '../ui/InputField';
@@ -20,10 +21,19 @@ export default function LoginForm() {
     router.push('/(tabs)');
   };
 
-  const handleGuestLogin = () => {
-    console.log('Guest login');
-    // Navigate to tabs as guest
-    router.push('/(tabs)');
+  const handleGuestLogin = async () => {
+    try {
+      // create a random guest display name
+      const guestName = `Guest${Math.floor(Math.random() * 9000) + 1000}`;
+      await AsyncStorage.setItem('userName', guestName);
+      await AsyncStorage.setItem('isGuest', 'true');
+      console.log('Guest login as', guestName);
+      // Replace navigation so user can't go back to login
+      router.replace('/(tabs)');
+    } catch (err) {
+      console.error('Failed to login as guest', err);
+      Alert.alert('Error', 'Unable to continue as guest. Please try again.');
+    }
   };
 
   const handleCreateAccount = () => {
