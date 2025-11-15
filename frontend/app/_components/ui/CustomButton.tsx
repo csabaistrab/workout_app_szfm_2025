@@ -1,25 +1,33 @@
-import { TouchableOpacity, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
 
 interface CustomButtonProps {
   title: string;
-  onPress: () => void;
+  onPress: (event: GestureResponderEvent) => void;
   variant?: 'primary' | 'secondary';
-  style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 }
 
-export default function CustomButton({ title, onPress, variant = 'primary', style }: CustomButtonProps) {
+export default function CustomButton({ 
+  title, 
+  onPress, 
+  variant = 'primary',
+  disabled = false 
+}: CustomButtonProps) {
   return (
     <TouchableOpacity 
       style={[
         styles.button,
         variant === 'primary' ? styles.primary : styles.secondary,
-        style,
+        disabled && styles.disabled
       ]} 
       onPress={onPress}
+      disabled={disabled}
+      activeOpacity={0.7}
     >
       <Text style={[
         styles.text,
-        variant === 'primary' ? styles.primaryText : styles.secondaryText
+        variant === 'primary' ? styles.primaryText : styles.secondaryText,
+        disabled && styles.disabledText
       ]}>
         {title}
       </Text>
@@ -33,6 +41,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginVertical: 8,
+    minHeight: 50,
+    justifyContent: 'center',
   },
   primary: {
     backgroundColor: '#007AFF',
@@ -41,6 +51,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: '#007AFF',
+  },
+  disabled: {
+    backgroundColor: '#CCCCCC',
+    borderColor: '#CCCCCC',
   },
   text: {
     fontSize: 16,
@@ -51,5 +65,8 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     color: '#007AFF',
+  },
+  disabledText: {
+    color: '#666666',
   },
 });
