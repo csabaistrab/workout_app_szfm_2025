@@ -1,7 +1,7 @@
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import PlanGenerator from '../../_components/plan/PlanGenerator';
-import WeekCard from '../../_components/plan/WeekCard';
+import PlanGenerator from '../_components/plan/PlanGenerator';
+import WeekCard from '../_components/plan/WeekCard';
 
 export default function PlanScreen() {
   const router = useRouter();
