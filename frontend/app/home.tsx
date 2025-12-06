@@ -4,6 +4,7 @@ import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { useState, useCallback, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Week } from './types';
+import { getUserKey } from '../services/storageKeys';
 
 export default function Home() {
   const router = useRouter();
@@ -22,7 +23,8 @@ export default function Home() {
           const weekNumbers = [1, 2, 3, 4, 5];
           const updatedWeeks = await Promise.all(
             weekNumbers.map(async (weekNum) => {
-              const isDone = await AsyncStorage.getItem(`week${weekNum}-done`);
+              const key = await getUserKey(`week${weekNum}-done`);
+              const isDone = await AsyncStorage.getItem(key);
               return { 
                 id: weekNum, 
                 title: `${weekNum}. hét`, 

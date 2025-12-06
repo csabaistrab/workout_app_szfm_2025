@@ -10,3 +10,6 @@ export interface Week {
   title: string;
   done: boolean;
 }
+
+// Default export to avoid expo-router treating this file as a route.
+export default {} as any;

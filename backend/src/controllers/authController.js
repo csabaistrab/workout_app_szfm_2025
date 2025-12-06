@@ -86,6 +86,7 @@ export const login = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { 
+      name,
       age, 
       weight, 
       height, 
@@ -99,6 +100,7 @@ export const updateProfile = async (req, res) => {
     }
 
     // Update fields if provided
+    if (name) user.name = name;
     if (age) user.age = age;
     if (weight) user.weight = weight;
     if (height) user.height = height;

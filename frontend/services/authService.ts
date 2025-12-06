@@ -1,9 +1,11 @@
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Replace this with your PC's LAN IP so physical devices can reach the backend.
-// You provided: 192.168.56.1
-const PC_HOST = '192.168.56.1';
+// Choose host depending on platform:
+// - On web (localhost dev server) use localhost
+// - On devices/emulator use the machine LAN IP that Metro reported
+const DEFAULT_LAN_IP = '192.168.31.150';
+const PC_HOST = Platform.OS === 'web' ? 'localhost' : DEFAULT_LAN_IP;
 
 // Notes:
 // - Android emulators (older) use 10.0.2.2 to reach host localhost.
@@ -27,11 +29,17 @@ export async function register(data: {
   });
 
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
+    const text = await res.text().catch(() => '');
+    console.error('Register failed status', res.status, 'body:', text);
+    const err = (() => {
+      try { return JSON.parse(text); } catch { return { message: text || 'Registration failed' }; }
+    })();
     throw new Error(err.message || 'Registration failed');
   }
 
-  const body = await res.json();
+  const bodyText = await res.text().catch(() => '');
+  const body = (() => { try { return JSON.parse(bodyText); } catch { return bodyText || {}; } })();
+  console.log('authService.register response', body);
   // store token + user
   if (body.token) await AsyncStorage.setItem('authToken', body.token);
   if (body.user) await AsyncStorage.setItem('user', JSON.stringify(body.user));
@@ -63,11 +71,17 @@ export async function login(email: string, password: string) {
   });
 
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
+    const text = await res.text().catch(() => '');
+    console.error('Login failed status', res.status, 'body:', text);
+    const err = (() => {
+      try { return JSON.parse(text); } catch { return { message: text || 'Login failed' }; }
+    })();
     throw new Error(err.message || 'Login failed');
   }
 
-  const body = await res.json();
+  const bodyText = await res.text().catch(() => '');
+  const body = (() => { try { return JSON.parse(bodyText); } catch { return bodyText || {}; } })();
+  console.log('authService.login response', body);
   if (body.token) await AsyncStorage.setItem('authToken', body.token);
   if (body.user) await AsyncStorage.setItem('user', JSON.stringify(body.user));
   // Compute and store BMI and category

@@ -62,7 +62,7 @@ export default function CreateAccountForm() {
         console.warn('Failed to persist userName', e);
       }
 
-      // Navigate to tab layout which works reliably on native
+      // Navigate to the tabs layout immediately after successful registration
       router.replace('/(tabs)');
     } catch (err: any) {
       console.error('Register failed', err);

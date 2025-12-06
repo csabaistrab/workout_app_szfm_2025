@@ -2,9 +2,9 @@
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Use your PC LAN IP for physical devices. You provided: 192.168.56.1
-const PC_HOST = '192.168.56.1';
-// For emulator use 10.0.2.2, but physical devices should use PC_HOST
+// Use the same platform-aware host logic as authService
+const DEFAULT_LAN_IP = '192.168.31.150';
+const PC_HOST = Platform.OS === 'web' ? 'localhost' : DEFAULT_LAN_IP;
 export const API_URL = `http://${PC_HOST}:3000/api`;
 
 async function getAuthHeaders() {

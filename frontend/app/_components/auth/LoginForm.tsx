@@ -22,6 +22,7 @@ export default function LoginForm() {
 
     setLoading(true);
     try {
+      console.log('Attempting login for', email);
       const res = await login(email, password);
       console.log('Login success', res);
       // persist display name if present
@@ -31,7 +32,8 @@ export default function LoginForm() {
       } catch (e) {
         console.warn('Failed to persist userName', e);
       }
-      // go to tabs
+      // Navigate to the app home immediately (alert can block navigation on some devices)
+      console.log('Navigating to tabs after login');
       router.replace('/(tabs)');
     } catch (err: any) {
       console.error('Login failed', err);
@@ -45,10 +47,12 @@ export default function LoginForm() {
     try {
       // create a random guest display name
       const guestName = `Guest${Math.floor(Math.random() * 9000) + 1000}`;
+      console.log('Attempting guest login as', guestName);
       await AsyncStorage.setItem('userName', guestName);
       await AsyncStorage.setItem('isGuest', 'true');
-      console.log('Guest login as', guestName);
-      // Replace navigation so user can't go back to login
+      console.log('Guest login persisted as', guestName);
+      // Navigate immediately to home for guest users
+      console.log('Navigating to tabs after guest login');
       router.replace('/(tabs)');
     } catch (err) {
       console.error('Failed to login as guest', err);
@@ -82,6 +86,7 @@ export default function LoginForm() {
       <CustomButton 
         title="Continue" 
         onPress={handleLogin}
+        loading={loading}
       />
       
       <Text style={styles.orText}>or</Text>

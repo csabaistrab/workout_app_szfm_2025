@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect, useCallback } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchWorkouts, updateWorkout } from "../services/workoutService";
+import { getUserKey } from '../services/storageKeys';
 
 export default function Day() {
   const { dayId, weekId } = useLocalSearchParams();
@@ -20,18 +21,21 @@ export default function Day() {
     const saveDayCompletion = async () => {
       if (allDone) {
         try {
-          await AsyncStorage.setItem(`week${weekId}-day${dayId}-done`, 'true');
+          const dayKey = await getUserKey(`week${weekId}-day${dayId}-done`);
+          await AsyncStorage.setItem(dayKey, 'true');
 
           // Check all days for week
           const daysStatus = await Promise.all(
             [1, 2, 3, 4, 5].map(async (dayNum) => {
-              const isDone = await AsyncStorage.getItem(`week${weekId}-day${dayNum}-done`);
+              const key = await getUserKey(`week${weekId}-day${dayNum}-done`);
+              const isDone = await AsyncStorage.getItem(key);
               return isDone === 'true';
             })
           );
 
           if (daysStatus.every(Boolean)) {
-            await AsyncStorage.setItem(`week${weekId}-done`, 'true');
+            const weekKey = await getUserKey(`week${weekId}-done`);
+            await AsyncStorage.setItem(weekKey, 'true');
           }
         } catch (err) {
           console.error('Error saving completion:', err);

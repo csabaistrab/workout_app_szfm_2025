@@ -30,15 +30,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <IconSymbol size={focused ? 34 : 28} name="magnifyingglass" color={color} />
-          ),
-        }}
-      />
+      {/* Explore tab removed — not used in this app */}
       <Tabs.Screen
         name="plan"
         options={{

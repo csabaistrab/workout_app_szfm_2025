@@ -44,3 +44,8 @@ export function useAuth() {
   }
   return context;
 }
+
+// Default export to avoid expo-router treating this file as a route.
+export default function _AuthContextNoop(): null {
+  return null;
+}
