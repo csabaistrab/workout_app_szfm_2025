@@ -4,21 +4,41 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import CustomButton from '../ui/CustomButton';
 import InputField from '../ui/InputField';
+import { login } from '../../../services/authService';
 
 export default function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (loading) return;
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-    
-    console.log('Login attempt:', { email, password });
-    // Navigate to tabs - explicit módon
-    router.push('/(tabs)');
+
+    setLoading(true);
+    try {
+      const res = await login(email, password);
+      console.log('Login success', res);
+      // persist display name if present
+      const displayName = res.user?.name || res.user?.username || email.split('@')[0];
+      try {
+        await AsyncStorage.setItem('userName', displayName);
+      } catch (e) {
+        console.warn('Failed to persist userName', e);
+      }
+      // go to tabs
+      router.replace('/(tabs)');
+    } catch (err: any) {
+      console.error('Login failed', err);
+      Alert.alert('Error', err?.message || 'Unable to login');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGuestLogin = async () => {
