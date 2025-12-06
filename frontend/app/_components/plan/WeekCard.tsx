@@ -15,7 +15,7 @@ export default function WeekCard({ weekNumber, isCompleted = false, onPress }: W
       ]} 
       onPress={onPress}
     >
-      <Text style={styles.weekText}>Week #{weekNumber}</Text>
+      <Text style={styles.weekText}>{weekNumber}. hét</Text>
       <View style={[
         styles.statusIndicator,
         isCompleted ? styles.completed : styles.pending

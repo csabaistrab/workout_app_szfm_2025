@@ -81,6 +81,27 @@ export default function Day() {
         }
       }
       
+      // Fallback: create mock tasks if no plan exists
+      console.log('No plan found, creating mock tasks');
+      const mockTasks = [
+        { id: '1', title: '🏃 Bemelegítés - 5 perc könnyű futás', done: false },
+        { id: '2', title: '💪 Fekvőtámasz - 15 ismétlés', done: false },
+        { id: '3', title: '🦵 Guggolás - 20 ismétlés', done: false },
+        { id: '4', title: '🧘 Plank - 30 másodperc', done: false },
+        { id: '5', title: '🤸 Nyújtás - 5 perc', done: false },
+      ];
+      
+      // Load completion status
+      const withStatus = await Promise.all(mockTasks.map(async (task) => {
+        const key = await getUserKey(`task-${weekNum}-${dayNum}-${task.id}`);
+        const isDone = await AsyncStorage.getItem(key);
+        return { ...task, done: isDone === 'true' };
+      }));
+      
+      setTasks(withStatus);
+      setLoading(false);
+      return;
+      
       // Fallback: try backend
       const data = await fetchWorkouts(weekNum, dayNum);
       console.log('loadTasks: backend data', data);
