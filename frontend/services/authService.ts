@@ -1,7 +1,14 @@
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:3000/api' : 'http://localhost:3000/api';
+// Replace this with your PC's LAN IP so physical devices can reach the backend.
+// You provided: 192.168.56.1
+const PC_HOST = '192.168.56.1';
+
+// Notes:
+// - Android emulators (older) use 10.0.2.2 to reach host localhost.
+// - For physical devices, use your PC LAN IP (PC_HOST).
+export const API_URL = `http://${PC_HOST}:3000/api`;
 
 export async function register(data: {
   name: string;
