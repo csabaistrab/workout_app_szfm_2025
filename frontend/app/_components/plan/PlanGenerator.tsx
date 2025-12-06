@@ -12,15 +12,15 @@ export default function PlanGenerator({ onGenerateAI, onGetStaticPlan }: PlanGen
       <Text style={styles.title}>Generate your plan</Text>
       
       <CustomButton 
-        title="Generate with AI" 
-        onPress={onGenerateAI}
+        title="🤖 AI Terv Generálása" 
+        onPress={onGenerateAI} 
       />
       
-      <Text style={styles.orText}>or</Text>
+      <Text style={styles.divider}>vagy</Text>
       
       <CustomButton 
-        title="Get static plan" 
-        onPress={onGetStaticPlan}
+        title="📋 Statikus Terv" 
+        onPress={onGetStaticPlan} 
         variant="secondary"
       />
     </View>

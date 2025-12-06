@@ -26,7 +26,7 @@ export default function Week() {
               const isDone = await AsyncStorage.getItem(key);
               return { 
                 id: dayNum, 
-                title: `${dayNum}. nap`, 
+                title: `🏋️ ${dayNum}. nap`, 
                 done: isDone === 'true' 
               };
             })

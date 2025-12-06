@@ -27,7 +27,7 @@ export default function Home() {
               const isDone = await AsyncStorage.getItem(key);
               return { 
                 id: weekNum, 
-                title: `${weekNum}. hét`, 
+                title: `📅 ${weekNum}. hét`, 
                 done: isDone === 'true' 
               };
             })

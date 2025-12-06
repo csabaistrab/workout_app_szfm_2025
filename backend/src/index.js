@@ -15,8 +15,12 @@ if (missingEnvVars.length > 0) {
   process.exit(1);
 }
 
-if (!process.env.GOOGLE_API_KEY) {
-  console.warn('⚠️ GOOGLE_API_KEY not set — AI features will be disabled or fallback to heuristic plans');
+if (!process.env.GROQ_API_KEY && !process.env.GOOGLE_API_KEY) {
+  console.warn('⚠️ No AI API key set (GROQ_API_KEY or GOOGLE_API_KEY) — AI features will fallback to heuristic plans');
+} else if (process.env.GROQ_API_KEY) {
+  console.log('✅ Groq AI enabled');
+} else if (process.env.GOOGLE_API_KEY) {
+  console.log('✅ Google AI enabled');
 }
 
 const app = express();

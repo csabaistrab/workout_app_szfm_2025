@@ -1,5 +1,5 @@
 // app/day.tsx
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, Alert } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, Alert, StyleSheet } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState, useEffect, useCallback } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -46,18 +46,46 @@ export default function Day() {
     saveDayCompletion();
   }, [allDone, dayId, weekId]);
 
-  // Fetch the tasks for this week/day from backend
+  // Fetch the tasks for this week/day from backend or AsyncStorage
   const loadTasks = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const weekNum = Number(weekId);
       const dayNum = Number(dayId);
+      
+      // First try to load from AsyncStorage (generated plan)
+      const planRaw = await AsyncStorage.getItem('generatedPlan');
+      if (planRaw) {
+        const plan = JSON.parse(planRaw);
+        // Filter tasks for this week and day
+        const filtered = plan.filter((t: any) => t.week === weekNum && t.day === dayNum);
+        
+        if (filtered.length > 0) {
+          const mapped = filtered.map((t: any, idx: number) => ({
+            id: t.id || t._id || String(idx + 1),
+            title: t.description || `Feladat ${t.taskNumber || idx + 1}`,
+            done: false, // Will load from user-specific storage below
+          }));
+          
+          // Load completion status from user-specific storage
+          const withStatus = await Promise.all(mapped.map(async (task) => {
+            const key = await getUserKey(`task-${weekNum}-${dayNum}-${task.id}`);
+            const isDone = await AsyncStorage.getItem(key);
+            return { ...task, done: isDone === 'true' };
+          }));
+          
+          setTasks(withStatus);
+          setLoading(false);
+          return;
+        }
+      }
+      
+      // Fallback: try backend
       const data = await fetchWorkouts(weekNum, dayNum);
-
       console.log('loadTasks: backend data', data);
+      
       const mapped = data.map((t: any, idx: number) => ({
-        // backend transforms _id -> id in toJSON; prefer t.id then t._id
         id: t.id ? String(t.id) : (t._id ? String(t._id) : String(idx + 1)),
         title: t.description || `Feladat ${t.taskNumber || idx + 1}`,
         done: !!t.completed,
@@ -66,7 +94,7 @@ export default function Day() {
       setTasks(mapped);
     } catch (err: any) {
       console.error('Error loading tasks:', err);
-      setError(err?.message || 'Hiba a feladatok betöltésekor');
+      setError(err?.message || 'Nincs elérhető feladat erre a napra');
     } finally {
       setLoading(false);
     }
@@ -97,36 +125,27 @@ export default function Day() {
     const prev = tasks;
     const updated = tasks.map(t => t.id === taskId ? { ...t, done: !t.done } : t);
     setTasks(updated);
-    // Debug
-    console.log('toggleTask pressed', { taskId, prev, updated });
 
-    // If taskId looks like a MongoDB ObjectId (24 hex chars), persist change
     try {
       const task = updated.find(t => t.id === taskId);
-      const idStr = task ? String(task.id) : null;
-      if (task && idStr) {
-        console.log('Sending updateWorkout for', idStr, 'completed=', task.done);
-        const res = await updateWorkout(idStr, { completed: task.done });
-        console.log('updateWorkout response', res);
-        // re-load tasks to reflect DB state (and id may have changed shape)
-        await loadTasks();
-      } else {
-        console.log('No backend id present, skipping network update for', idStr);
+      if (task) {
+        // Save to user-specific AsyncStorage
+        const weekNum = Number(weekId);
+        const dayNum = Number(dayId);
+        const key = await getUserKey(`task-${weekNum}-${dayNum}-${task.id}`);
+        await AsyncStorage.setItem(key, task.done ? 'true' : 'false');
+        console.log('Task status saved:', key, task.done);
       }
     } catch (err) {
-      console.error('Error updating task on server, reverting UI:', err);
-      // revert
+      console.error('Error saving task status:', err);
       setTasks(prev);
       Alert.alert('Hiba', 'Nem sikerült menteni a feladat állapotát');
     }
   };
 
   return (
-    <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
-      <Text style={{ fontSize: 24, marginBottom: 20, fontWeight: "bold" }}>
-        {dayId}. nap feladatai
-        {allDone && " ✅"}
-      </Text>
+    <View style={styles.wrapper}>
+      <Text style={styles.title}>✅ {dayId}. nap feladatai</Text>
 
       {allDone && (
         <View style={{
@@ -136,7 +155,7 @@ export default function Day() {
           marginBottom: 20,
         }}>
           <Text style={{ color: "#fff", fontSize: 16, textAlign: "center" }}>
-            ✅ Ez a nap teljesítve van! A feladatokat nem lehet módosítani.
+            ✅ Ez a nap teljesítve! Gratulálok! 🎉
           </Text>
         </View>
       )}
@@ -195,3 +214,16 @@ export default function Day() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+});

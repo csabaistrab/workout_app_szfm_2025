@@ -24,7 +24,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Főoldal',
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol size={focused ? 34 : 28} name="house.fill" color={color} />
           ),
@@ -34,7 +34,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="plan"
         options={{
-          title: 'Plan',
+          title: 'Terv',
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol size={focused ? 34 : 28} name="list.bullet" color={color} />
           ),
@@ -43,7 +43,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="workout"
         options={{
-          title: 'Workout',
+          title: 'Edzés',
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol size={focused ? 30 : 28} name="dumbbell.fill" color={color} />
           ),
@@ -52,7 +52,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Profil',
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol size={focused ? 34 : 28} name="person.fill" color={color} />
           ),
