@@ -2,7 +2,7 @@
 
 **Projekt:** Workout App\
 **Tesztelő:** Bihari Levente\
-**Dátum:** 2025.02.07
+**Dátum:** 2025.12.07
 
 ---
 
@@ -29,21 +29,21 @@
 
 ### TC-01 – Belépés üres mezőkkel
 
-- **Lépések:** Minden mezőt üresen hagyok, majd belépés gomb.
+- **Lépések:** Minden mezőt üresen hagyok, majd belépés gombra kattintok.
 - **Várt:** Hibaüzenet jelenjen meg.
 - **Tényleges:** Nem történik semmi.
 - **Státusz:** ❌ NOK
 
 ### TC-02 – Belépés teljes adatokkal
 
-- **Lépések:** Kitöltöm a mezőket (név, magasság, súly), belépés.
+- **Lépések:** Kitöltöm a mezőket (név, magasság, súly), majd belépés.
 - **Várt:** Főoldal megjelenik, felhasználói adatok helyesek.
 - **Tényleges:** Belépés OK, UI rendben.
 - **Státusz:** ✅ OK
 
 ### TC-03 – Hetek betöltése
 
-- **Lépések:** A belépés után böngészem a hetek listáját.
+- **Lépések:** A belépés után megnézem a hetek listáját.
 - **Várt:** Minden hét látható.
 - **Tényleges:** Hetek rendben megjelennek.
 - **Státusz:** ✅ OK
@@ -52,21 +52,21 @@
 
 - **Lépések:** Hetet választok, majd egy napot.
 - **Várt:** Nap feladatlistája megjelenik.
-- **Tényleges:** Feladatlista OK.
+- **Tényleges:** Feladatlista rendben.
 - **Státusz:** ✅ OK
 
 ### TC-05 – Egy feladat kipipálása
 
-- **Lépések:** Egy feladatra kattintok/tap.
+- **Lépések:** Egy feladatra kattintok.
 - **Várt:** Checkbox/pipa és vizuális státusz frissül.
 - **Tényleges:** Státusz helyesen változik.
 - **Státusz:** ✅ OK
 
 ### TC-06 – Több feladat kipipálása + visszalépés
 
-- **Lépések:** Több feladat kipipálása → kilépés → visszalépés.
+- **Lépések:** Több feladat kipipálása, majd kilépés és utána visszalépés.
 - **Várt:** Feladatok státusza megmarad.
-- **Tényleges:** Állapot rendben.
+- **Tényleges:** Megmarad a feladatoknak a státusza.
 - **Státusz:** ✅ OK
 
 ### TC-07 – Nap automatikus teljesítése
@@ -78,9 +78,9 @@
 
 ### TC-08 – Hét lezárása
 
-- **Lépések:** Minden nap teljes, minden feladat kipipálva → visszalépés főnézetre.
+- **Lépések:** Minden nap teljes, minden feladat kipipálva, utána visszalépés főnézetre.
 - **Várt:** Hét státusza teljes, vizuálisan jelölve.
-- **Tényleges:** Hét státusza OK.
+- **Tényleges:** Hét státusza rendben.
 - **Státusz:** ✅ OK
 
 ### TC-09 – Feladatlista véletlenszerűsége napok között
@@ -92,21 +92,21 @@
 
 ### TC-10 – Backend‑hiba login próbálkozás
 
-- **Lépések:** Backend leállítva → login próbálkozás.
-- **Várt:** Hibaüzenet, app nem crash.
-- **Tényleges:** Hibaüzenet OK, app stabil.
+- **Lépések:** Backend leállítva, login próbálkozás.
+- **Várt:** Hibaüzenet, app nem omlik össze.
+- **Tényleges:** Hibaüzenet rendben, app stabil.
 - **Státusz:** ✅ OK
 
 ### TC-11 – Kilépés / újraindítás utáni állapotmegőrzés
 
-- **Lépések:** Feladatok kipipálása → kilépés → újra belépés.
+- **Lépések:** Feladatok kipipálása, majd kilépés és újra belépés.
 - **Várt:** Állapot megmarad.
 - **Tényleges:** Állapot rendben.
 - **Státusz:** ✅ OK
 
 ### TC-12 – Felhasználói adat módosítása + új belépés
 
-- **Lépések:** Profil módosítás (magasság/súly) → kilépés → újra login.
+- **Lépések:** Profil módosítás (magasság/súly), utána kilépés és újra bejelentkezés.
 - **Várt:** Adatok frissülnek, UI rendben.
-- **Tényleges:** Módosítás OK.
+- **Tényleges:** Adatok módosultak.
 - **Státusz:** ✅ OK
