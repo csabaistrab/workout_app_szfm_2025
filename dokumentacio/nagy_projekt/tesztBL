@@ -3,3 +3,18 @@ Workout App – Tesztelési Jegyzőkönyv
 Projekt: Workout App
 Tesztelő: Bihari Levente
 Dátum: 2025.12.07
+
+Összefoglaló teszt táblázat
+Teszt‑ID	Teszteset röviden	Eredmény	Megjegyzés
+TC-01	Belépés üres adatokkal	❌ NOK	Nincs hibaüzenet
+TC-02	Belépés teljes adatokkal	✅ OK	Sikeres belépés
+TC-03	Hetek listájának megjelenítése	✅ OK	Hetek listája rendben
+TC-04	Nap kiválasztása, feladatok betöltése	✅ OK	Feladatok láthatóak
+TC-05	Egy feladat kipipálása	✅ OK	Vizuális státusz frissül
+TC-06	Több feladat kipipálása + visszalépés	✅ OK	Állapot megmarad
+TC-07	Nap automatikus teljesítése	✅ OK	Nap státusz frissül
+TC-08	Hét lezárása minden nap teljesítve	✅ OK	Hét státusza frissül
+TC-09	Feladatlista véletlenszerűsége napok között	✅ OK	Napok feladatai nem ismétlődnek
+TC-10	Backend‑hiba login próbálkozás	✅ OK	Hibaüzenet megjelenik, app stabil
+TC-11	Kilépés / újraindítás utáni állapotmegőrzés	✅ OK	Adatok megmaradnak
+TC-12	Felhasználói adat módosítása + új belépés	✅ OK	Adatok frissülnek, UI rendben
