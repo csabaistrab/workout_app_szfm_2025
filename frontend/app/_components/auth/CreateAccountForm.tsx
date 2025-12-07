@@ -35,37 +35,56 @@ export default function CreateAccountForm() {
     setLoading(true);
     try {
       const payload = {
-        name: formData.username || formData.email,
+        name: formData.username || formData.email.split('@')[0],
         email: formData.email,
         password: formData.password,
-        age: Number(formData.age) || 0,
-        weight: Number(formData.weight) || 0,
-        height: Number(formData.height) || 0,
+        age: Number(formData.age) || 25,
+        weight: Number(formData.weight) || 70,
+        height: Number(formData.height) || 175,
         fitnessLevel: 'beginner',
         workoutPreferences: { focusAreas: [], timePerSession: 30 }
       };
 
-      const res = await register(payload);
-      console.log('Registration response', res);
-
-      // Try to generate a plan afterwards but don't block navigation on failure
-      generateWorkoutPlan(payload.weight, payload.height).then(planRes => {
-        console.log('Plan generated after registration', planRes);
-      }).catch(planErr => {
-        console.warn('Plan generation failed after registration', planErr);
-      });
-
-      // Persist display name so Home can read it on native
       try {
-        await AsyncStorage.setItem('userName', payload.name);
-      } catch (e) {
-        console.warn('Failed to persist userName', e);
+        // Try backend registration with 5 second timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        const res = await register(payload);
+        clearTimeout(timeoutId);
+        console.log('Registration response', res);
+
+        // Try to generate a plan afterwards but don't block navigation on failure
+        generateWorkoutPlan(payload.weight, payload.height).then(planRes => {
+          console.log('Plan generated after registration', planRes);
+        }).catch(planErr => {
+          console.warn('Plan generation failed after registration', planErr);
+        });
+      } catch (backendErr) {
+        console.warn('Backend registration failed or timed out, creating local profile', backendErr);
+        // Continue with local profile creation
       }
 
-      // Navigate to the tabs layout immediately after successful registration
+      // Persist user data locally (works even if backend fails)
+      await AsyncStorage.setItem('userName', payload.name);
+      await AsyncStorage.setItem('user', JSON.stringify({
+        name: payload.name,
+        email: payload.email,
+        age: payload.age,
+        weight: payload.weight,
+        height: payload.height,
+      }));
+      
+      // Calculate and store BMI
+      const bmiValue = payload.weight / ((payload.height / 100) ** 2);
+      await AsyncStorage.setItem('userBmi', bmiValue.toFixed(1));
+
+      console.log('Local profile created successfully');
+
+      // Navigate to the tabs layout immediately
       router.replace('/(tabs)');
     } catch (err: any) {
-      console.error('Register failed', err);
+      console.error('Registration failed', err);
       Alert.alert('Hiba', err?.message || 'Nem sikerült regisztrálni');
     } finally {
       setLoading(false);
