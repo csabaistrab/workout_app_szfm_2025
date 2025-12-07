@@ -3,15 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Get a unique user identifier for scoping workout progress.
- * Uses authToken if available, otherwise userName, otherwise 'guest'.
+ * Uses userName (persistent) instead of authToken (changes on each login).
  */
 export async function getUserId(): Promise<string> {
   try {
-    const token = await AsyncStorage.getItem('authToken');
-    if (token) return token; // Use token as unique ID for logged-in users
-    
     const userName = await AsyncStorage.getItem('userName');
-    if (userName) return userName; // Use userName for guest users
+    if (userName) return userName; // Use userName as stable identifier
+    
+    const token = await AsyncStorage.getItem('authToken');
+    if (token) return token; // Fallback to token
     
     return 'guest'; // Fallback
   } catch {
